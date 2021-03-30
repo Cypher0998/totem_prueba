@@ -23,14 +23,36 @@
     <field name="arch" type="xml">
       <form string="Formulario de eventos">
         <sheet>
-          <group>
-            <field name="name"/>
-            <field name="banner"/>
-            <field name="description"/>
-            <field name="event_url"/>
+          <group rowspan="4">
+            <group rowspan="2" row="2">
+              <field name="name"/>
+              <field name="description"/>
+              <field name="event_url" widget="url" required="1"/>
+            </group>
+            <group rowspan="2" row="2">
+              <field name="selector_banner" required="1"/>
+              <field name="banner" attrs="{'invisible':[('selector_banner','!=','pic')]}"/>
+              <field name="banner_video" attrs="{'invisible':[('selector_banner','!=','video')]}" widget="url"/>
+              <field name="banner_rss" attrs="{'invisible':[('selector_banner','!=','rss')]}" widget="url"/>
+              <field name="banner_url" widget="url"/>
+            </group>
           </group>
-          <label for = "image_ids"/>
-          <field name = "image_ids" required="1"/>
+          <notebook>
+            <page string="Image Slider">
+              <label for = "image_ids"/>
+              <field name = "image_ids" required="1"/>
+            </page>
+            <page string="Event's Date">
+              <group rowspan="4">
+                <group rowspan="2" row="2">
+                    <field name= "initial_event_datetime"/>
+                </group>
+                <group rowspan="2" row="2">
+                    <field name= "final_event_datetime"/>
+                </group>
+              </group> 
+            </page>
+          </notebook>
         </sheet>
       </form>
     </field>
@@ -38,7 +60,7 @@
 
 <!-- vista del totem -->
   <record model="ir.actions.act_window" id="totem_list_action">
-    <field name="name">Vista de los Totems</field>
+    <field name="name">Vista de los Eventos</field>
     <field name="res_model">totem_general.totem_general</field>
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>

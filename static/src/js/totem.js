@@ -14,7 +14,7 @@ odoo.define('totem_prueba.totem', function(require) {
 	var event = null;
 
 	// Crear eventos de desplazamiento a la derecha y a la izquierda de los eventos
-	/*var TotemMode = AbstractAction.extend ({
+	var TotemMode = AbstractAction.extend ({
 		eventTimeout: null,
 		i: 0,
 		cargada_config: false,
@@ -35,7 +35,7 @@ odoo.define('totem_prueba.totem', function(require) {
 		},
 
 		start: async function () {
-			console.log("START")
+			console.log("START");
 
 			await this.descargarConfigs();
 			await this.descargarDatos();
@@ -70,10 +70,6 @@ odoo.define('totem_prueba.totem', function(require) {
 				self.sliderIndex++;
 				self.myCarrousel = setTimeout(() => {self.config()},res[0].duration*1000); 
 			})
-			// .catch(function(err){
-			// 	console.error(err);
-			// 	Promise.reject(err);
-			// }) 
 		},
 
 		
@@ -149,5 +145,5 @@ odoo.define('totem_prueba.totem', function(require) {
 	});
 
 	core.action_registry.add('totem_prueba_totem', TotemMode);
-	return TotemMode;*/
+	return TotemMode;
 });

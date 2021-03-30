@@ -11,4 +11,4 @@
 		parent="main_menu"
 		action="totem_prueba_action_totem_mode"/>
 
-	</odoo>
+</odoo>

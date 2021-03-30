@@ -28,14 +28,7 @@
                 </div>
                     
                 <div class="col-lg-8 align-self-center" id="centerColumn">
-                    <!-- <div class="o_totem_prueba_totem_mode_text_header">
-                        <div id="headerTotem">
-                            <h1 class = "pt-5 text-center" id="title">
-                                <t t-esc="widget.event.name"/>
-                            </h1>
-                        </div>
-                    </div>
- -->                            <div class="imgQrContainer">
+                       <div class="imgQrContainer">
                                 <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
                                     + (widget.event.id)
                                     + '/banner/'}}"
@@ -72,14 +65,12 @@
                 </div>                  
             </div>
 
-                   
-
             <div class="row align-items-end">
                 <div class="col-lg-12 col-xl-12" id="footer">
                     <div class="o_totem_prueba_totem_mode_footer"/>
                 </div>
             </div>  
-    </div>
+        </div>
 
     </t>
 
@@ -92,4 +83,6 @@
                 <img id="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.company_qr + '&amp;width=132&amp;height=132'}}" 
                 />
     </t>
-</template>
+</template> 
+
+

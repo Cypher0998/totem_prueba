@@ -11,8 +11,8 @@ class ResConfigSettings(models.TransientModel):
 	company_qr = fields.Text(string=_("Company's url"), related='company_id.company_qr', readonly=False)
 	company_description=fields.Text(string=_("Company's description"), related='company_id.company_description', readonly=False)
 
-	# @api.constrains('company_description')
-	# def _constrains_company_description(self):
-	# 	if len(self.company_description) > 500:
-	# 		raise exceptions.ValidationError(_("Límite de caracteres 500")) 
-	# 	pass
+	@api.constrains('company_description')
+	def _constrains_company_description(self):
+		if len(self.company_description) > 50:
+			raise exceptions.ValidationError(_("Límite de caracteres 50")) 
+		pass
