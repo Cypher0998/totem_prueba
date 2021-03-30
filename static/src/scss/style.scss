@@ -1,0 +1,153 @@
+#contenedor{
+   background: url('/totem_prueba/static/src/img/fondo.jpg') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   height: 100%;
+   width: 100% ;
+}
+.o_totem_prueba_totem_mode_text_header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#header{
+    background: url('/totem_prueba/static/src/img/header.jpg') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   height: 100%;
+   width: 100% ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#headerTotem{
+  width: 1080px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#leftArrow{
+  height:100px;
+  width:100px;
+
+}
+#rightArrow{
+  height:100px;
+  width:100px;
+}
+.myHeight {
+  height: 100px;
+}
+
+.myGeneralWidth {
+  width: 880px;
+}
+
+.buttons{
+  border-color: transparent;
+  text-align:center;
+  background-color: transparent;
+}
+.botonera{
+  text-align: center;
+}
+.o_totem_prueba_totem_mode_left_side{
+ height:1656px;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.o_totem_prueba_totem_mode_right_side{
+ height:1656px;
+ background-color: transparent;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#centerColumn{
+  height:1656px;
+}
+#title{
+  color:white;
+  font-size: 64px;
+  text-align: center;
+}
+#descriptionContent{
+  padding: 30px;
+  height:500px;
+  width:688px;
+}
+#description{
+  color : black;
+  font-size: x-large;
+}
+#slideshowContent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#slideshow{
+  text-align: center;
+}
+#imagenSlider{
+  background-color: transparent;
+  width:440px;
+  height:440px;
+}
+.imgQrContainer{
+  position:relative;
+  height:688px;
+}
+#banner{
+  position:absolute;
+  padding-top:20px;
+  height:668px;
+  width:668px;
+}
+#QrBanner{
+  position:absolute;
+  right:0;
+  bottom:0;
+}
+#footer{
+    background: url('/totem_prueba/static/src/img/footer.jpg') no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   height: 100%;
+   width: 100% ;
+}
+.o_totem_prueba_totem_mode_footer{
+  width:1080px;
+  height:132px;
+  display: flex;
+  justify-content:space-between;
+}
+#footerText{
+  height: 132px;
+  width: 948px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#footerContent{
+
+  text-align:left;
+  color : white;
+  font-size: xx-large;
+}
+
+#QR{
+    padding-right: 12px;
+    float:right;
+}
+
+
+

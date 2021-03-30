@@ -1,0 +1,56 @@
+<odoo>
+
+  <!-- treeview totem -->
+  <record model="ir.ui.view" id="view_totem_id">
+    <field name="name">totem.tree</field>
+    <field name="model">totem_general.totem_general</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <tree string="cursos list">
+        <field name="name"/>
+        <field name="banner"/>
+        <field name="description"/>
+        <field name="event_url"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- formulario totem -->
+  <record model="ir.ui.view" id="view_id_form">
+    <field name="name">totem_general.form</field>
+    <field name="model">totem_general.totem_general</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <form string="Formulario de eventos">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="banner"/>
+            <field name="description"/>
+            <field name="event_url"/>
+          </group>
+          <label for = "image_ids"/>
+          <field name = "image_ids" required="1"/>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+<!-- vista del totem -->
+  <record model="ir.actions.act_window" id="totem_list_action">
+    <field name="name">Vista de los Totems</field>
+    <field name="res_model">totem_general.totem_general</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling-face">No hay títulos</p>
+    </field>
+  </record>
+
+  <!-- insercion de icono en la barra lateral -->
+  <menuitem id="main_menu" name="Totempplication"
+    web_icon="totem_prueba,static/description/icon.png"/>
+
+  <menuitem id="prueba_menu" name="Lista de eventos" parent="main_menu" action="totem_list_action"/>
+  
+</odoo>

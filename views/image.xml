@@ -1,0 +1,41 @@
+<odoo>
+
+  <!-- treeview curso -->
+  <record model="ir.ui.view" id="view_image_id">
+    <field name="name">image.tree</field>
+    <field name="model">image.image</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <tree string="Lista de imágenes">
+        <field name="name"/>
+        <field name="my_image"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- formulario para ls imágenes -->
+  <record model="ir.ui.view" id="view_id_image_form">
+    <field name="name">image.form</field>
+    <field name="model">image.image</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <form string="Formulario de eventos">
+        <sheet>
+          <group>
+            <field name="name" required="1"/>
+            <field name="my_image" required="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+<!-- vista de los cursos -->
+  <record model="ir.actions.act_window" id="image_list_action">
+    <field name="name">Vista de las Imágenes</field>
+    <field name="res_model">image.image</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem id="lista_imagenes" name="Lista de imágenes" parent="main_menu" action="image_list_action"/>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <t t-name="TotemModeMenu">
+        <div class="container-fluid" id="contenedor">
+
+            <div class="row align-items-start">
+                <div class="col-lg-12 col-xl-12" id="header">
+                    <div class="o_totem_prueba_totem_mode_text_header">
+                        <div id="headerTotem">
+                            <h1 id="title">
+                                <t t-esc="widget.event.name"/>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+
+            <div class="row justify-content-between align-items-center"> 
+                
+                <div class = "col-lg-2">
+                    <div class="o_totem_prueba_totem_mode_left_side">
+                        <div class="botonera">
+                            <button class="buttons" id="leftArrowButton">
+                                <img src="/totem_prueba/static/src/img/left.png" id="leftArrow"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="col-lg-8 align-self-center" id="centerColumn">
+                    <!-- <div class="o_totem_prueba_totem_mode_text_header">
+                        <div id="headerTotem">
+                            <h1 class = "pt-5 text-center" id="title">
+                                <t t-esc="widget.event.name"/>
+                            </h1>
+                        </div>
+                    </div>
+ -->                            <div class="imgQrContainer">
+                                <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
+                                    + (widget.event.id)
+                                    + '/banner/'}}"
+                                />
+
+                                <img id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.event_url + '&amp;width=100&amp;height=100'}}" 
+                                />
+                            </div>
+                        <div id="descriptionContent">
+                            <div id="description"><t t-esc="widget.event.description"/></div>
+                        </div>
+                        <div id="slideshowContent">
+                            <div id="slideshow">
+                                 <t t-foreach="widget.event.image_ids" t-as="i">
+                                    <div class="myImgSlider">
+                                        <img id="imagenSlider" t-attf-src="{{'/web/image/image.image/' 
+                                        + (i)
+                                        + '/my_image/'}}"
+                                    />
+                                    </div>
+                                </t>   
+                            </div>
+                        </div>
+                    </div>
+           
+                <div class="col-lg-2">
+                    <div class="o_totem_prueba_totem_mode_right_side">
+                        <div class="botonera">
+                            <button class="buttons" id="rightArrowButton">
+                                <img src="/totem_prueba/static/src/img/right.png" id="rightArrow"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>                  
+            </div>
+
+                   
+
+            <div class="row align-items-end">
+                <div class="col-lg-12 col-xl-12" id="footer">
+                    <div class="o_totem_prueba_totem_mode_footer"/>
+                </div>
+            </div>  
+    </div>
+
+    </t>
+
+    <t t-name="ConfigsData">
+            <div id="footerText">
+                <div id="footerContent">
+                    <p><t t-esc="widget.company_description"/></p>
+                </div>
+            </div>
+                <img id="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.company_qr + '&amp;width=132&amp;height=132'}}" 
+                />
+    </t>
+</template>

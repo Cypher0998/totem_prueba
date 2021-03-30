@@ -1,0 +1,62 @@
+<odoo>
+  <!-- Tag t cosas QWeb -->
+  <!-- t-set crea una variable -->
+  <!-- t-value le asigna valor -->
+  <!-- t-esc muestra por pantalla un dato procesado -->
+  <!-- t-raw muestra por pantalla un dato en crudo -->
+  <!-- t-field coger campos de odoo directamente -->
+  <!-- t-if funciona como un condicional -->
+  <!-- t-elif funciona como else if -->
+  <!-- t-else --> 
+  <!-- t-att son atributos -->
+
+  <!-- 
+    Ejemplo de t-set y t-value
+    <t t-set="value" t-value="2 + 2">
+    </t>
+   -->
+
+  <!-- 
+    Ejemplo de utilizacion de condición y mostrar un registro guardado previamente
+  <p t-if="value==1" t-esc="value"/>
+   --> 
+  
+  <!-- 
+   Ejemplo de utilización de bucle de foreach
+    <t t-foreach="[1,2,3,4]" t-as="i">
+      <p t-esc="i"/>
+    </t>
+     -->
+
+  <!-- 
+  Ejemplo de uso de atributos
+
+    1. Para un solo atributo
+
+      <div t-att-a="12"/>
+
+        <div a="12">
+      </div>
+
+    2. Para varios atributos
+
+      <div t-att="{'a' : 1, 'b : 2'}"/>
+      <div a="1" b="2">
+        </div>
+
+   -->
+  <!-- 
+     Como llamar a otros templates
+     <t t-call="index"/>
+
+   -->
+
+  <!-- 
+     Ejemplo utilización js
+     <t t-set="value" t-value="2 + 2">
+     <t t-js="odoo">
+      console.log("Value", odoo.value);
+  </t>
+    -->
+
+</odoo>
