@@ -35,8 +35,6 @@ odoo.define('totem_prueba.totem', function(require) {
 		},
 
 		start: async function () {
-			console.log("START");
-
 			await this.descargarConfigs();
 			await this.descargarDatos();
 		},
@@ -111,7 +109,7 @@ odoo.define('totem_prueba.totem', function(require) {
 
 			if (self.i >= self.allMyEvents.length)
 				self.i = 0;
-
+			self.clear();
 			self.rebootTimeout();
 		},
 
@@ -121,12 +119,13 @@ odoo.define('totem_prueba.totem', function(require) {
 
 			if (self.i < 0)
 				self.i = self.allMyEvents.length - 1;
-
+			self.clear();
 			self.rebootTimeout();
 		},
 
 		rebootTimeout: async function() {
 			let self = this;
+			self.clear();
 			// console.log(self.allMyEvents)
 			self.event = self.allMyEvents[self.i];
 			self.$el.html(QWeb.render("TotemModeMenu", {widget: self}));
@@ -138,7 +137,7 @@ odoo.define('totem_prueba.totem', function(require) {
 			setTimeout(() => {self.config();},0);
 
 			self.eventTimeout = setTimeout(function(){
-				clearTimeout(self.myCarrousel);
+				self.clear();
 				self.nextSlide();
 			},  self.sacar_duration);
 		},

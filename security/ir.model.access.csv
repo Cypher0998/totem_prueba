@@ -3,3 +3,4 @@ access_totem_general_totem_general,totem_general.totem_general,model_totem_gener
 access_image_image,image.image,model_image_image,,1,1,1,1
 access_res_company,res.company,model_res_company,,1,1,1,1
 access_res_config_settings,res.config.settings,model_res_config_settings,,1,1,1,1
+access_screen_screen,screen.screen,model_screen_screen,,1,1,1,1

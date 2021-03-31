@@ -6,11 +6,13 @@
     <field name="model">totem_general.totem_general</field>
     <field name="priority" eval="16"/>
     <field name="arch" type="xml">
-      <tree string="cursos list">
+      <tree string="Event's List">
         <field name="name"/>
-        <field name="banner"/>
+        <!-- <field name="banner"/> -->
         <field name="description"/>
         <field name="event_url"/>
+        <field name="initial_event_datetime"/>
+        <field name="final_event_datetime"/>
       </tree>
     </field>
   </record>
@@ -69,10 +71,5 @@
     </field>
   </record>
 
-  <!-- insercion de icono en la barra lateral -->
-  <menuitem id="main_menu" name="Totempplication"
-    web_icon="totem_prueba,static/description/icon.png"/>
-
-  <menuitem id="prueba_menu" name="Lista de eventos" parent="main_menu" action="totem_list_action"/>
-  
+  <menuitem id="prueba_menu" name="Eventos" parent="main_menu" action="totem_list_action"/>  
 </odoo>

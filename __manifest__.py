@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/screen.xml',
         'views/totem_general_view.xml',
         'views/image.xml',
         'views/res_config_settings_views.xml',

@@ -8,21 +8,29 @@
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
                 <div class="app_settings_block" data-string="Totem" string="Totem" data-key="totem_prueba">
-                    <h2>Configuración</h2>
-                    <div class="row mt16 o_settings_container">
-                            <div class="col-12 col-lg-6 o_setting_box">
-                                <label for="event_duration"/>
-                                <field name="event_duration" widget="float_time"/>
-                                <label for="company_description"/>
-                                <field name="company_description"/>
+                    <h1>Configuración</h1>
+                        <h2>Pie de página</h2>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <label for="company_qr"/>
+                                    <field name="company_qr" widget="url"/>
+                                    <label for="company_description"/>
+                                    <field name="company_description"/>
+                                </div>
                             </div>
-                            <div class="col-12 col-lg-6 o_setting_box">
-                                <label for="duration"/>
-                                <field name="duration" widget="float_time"/>
-                                <label for="company_qr"/>
-                                <field name="company_qr"/>
-                            </div>
-                    </div> 
+                        <h2>Tiempos</h2>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <label for="duration"/>
+                                    <field name="duration" widget="float_time"/>
+                                    <label for="event_duration"/>
+                                    <field name="event_duration" widget="float_time"/>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <label for="refresh_time"/>
+                                    <field name="refresh_time" widget="float_time"/>
+                                </div>
+                            </div> 
                 </div>
             </xpath>
         </field>

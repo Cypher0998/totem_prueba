@@ -78,10 +78,23 @@
   font-size: 64px;
   text-align: center;
 }
+
+#banner{
+  position:absolute;
+  padding-top:20px;
+  height:67.5%;
+  width:100%;
+}
+#QrBanner{
+  position:absolute;
+  right:0;
+  bottom:0;
+}
+
 #descriptionContent{
-  padding: 30px;
-  height:500px;
-  width:688px;
+  padding-top: 50px;
+  height:15%;
+  width:100%;
 }
 #description{
   color : black;
@@ -97,24 +110,14 @@
 }
 #imagenSlider{
   background-color: transparent;
-  width:668px;
-  height:440px;
+  width:100%;
+  height:696px;
 }
 .imgQrContainer{
   position:relative;
   height:688px;
 }
-#banner{
-  position:absolute;
-  padding-top:20px;
-  height:668px;
-  width:668px;
-}
-#QrBanner{
-  position:absolute;
-  right:0;
-  bottom:0;
-}
+
 #footer{
     background: url('/totem_prueba/static/src/img/footer.jpg') no-repeat fixed center;
    -webkit-background-size: cover;

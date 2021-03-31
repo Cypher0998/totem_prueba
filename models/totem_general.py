@@ -18,16 +18,15 @@ class totem_general(models.Model):
 		('rss','RSS')], 
 		string = _('Type banner selector'))
 	
-	initial_event_datetime = fields.Datetime()
-	final_event_datetime = fields.Datetime()
+	initial_event_datetime = fields.Datetime(string = _("Initial Date"))
+	final_event_datetime = fields.Datetime(string = _("Final Date"))
 
 	image_ids = fields.Many2many('image.image', string = _("Images slider"))
 
 
-
 	@api.constrains('description')
 	def _constrains_description(self):
-		if len(self.description) > 250:
+		if len(self.description) > 200:
 			raise exceptions.ValidationError(_("Límite de caracteres 250")) 
 		pass
 	@api.constrains('name')

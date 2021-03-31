@@ -1,0 +1,48 @@
+<odoo>
+	<!-- treeview totem -->
+	<record model = "ir.ui.view" id = "view_screen_id">
+		<field name = "name">screen.tree</field>
+		<field name = "model">screen.screen</field>
+		<field name = "priority" eval="16"/>
+		<field name = "arch" type = "xml">
+			<tree string = "Screen's List">
+				<!-- <field name = "id"/> -->
+        <field name = "name"/>
+				<field name = "description"/>
+			</tree>
+		</field>
+	</record>
+
+	 <!-- formulario para ls imágenes -->
+  <record model = "ir.ui.view" id = "view_screen_form">
+    <field name = "name">screen.form</field>
+    <field name = "model">screen.screen</field>
+    <field name = "priority" eval="16"/>
+    <field name = "arch" type="xml">
+      <form string = "Formulario de pantallas">
+        <sheet>
+          <group>
+            <field name = "name" required="1"/>
+            <field name = "description" />
+            <field name = "event_ids"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+<!-- vista del totem -->
+  <record model="ir.actions.act_window" id="screen_list_action">
+    <field name="name">Vista de Pantallas</field>
+    <field name="res_model">screen.screen</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling-face">No hay títulos</p>
+    </field>
+  </record>
+  <!-- insercion de icono en la barra lateral -->
+  <menuitem id="main_menu" name="Totempplication" 
+    web_icon="totem_prueba,static/description/icon.png"
+    action="screen_list_action"/>
+</odoo>	
