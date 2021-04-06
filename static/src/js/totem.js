@@ -66,6 +66,9 @@ odoo.define('totem_prueba.totem', function(require) {
 					self.sliderIndex = 0;
 				aux[self.sliderIndex].style.display = "block";
 				self.sliderIndex++;
+				if (res[0].duration==0){
+					res[0].duration=4;
+				}
 				self.myCarrousel = setTimeout(() => {self.config()},res[0].duration*1000); 
 			})
 		},
@@ -80,6 +83,10 @@ odoo.define('totem_prueba.totem', function(require) {
 			})
 			.then(function(res) {
 				self.datos_company = res[0];
+				if (self.datos_company.event_duration==0){
+					self.datos_company.event_duration=10;
+				}
+
 				self.sacar_duration=(self.datos_company.event_duration *1000);
 			});
 		}, 

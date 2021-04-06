@@ -28,15 +28,25 @@
                 </div>
                     
                 <div class="col-lg-8 align-self-center" id="centerColumn">
-                       <div class="imgQrContainer">
-                                <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
-                                    + (widget.event.id)
-                                    + '/banner/'}}"
-                                />
+                       <div class="BannerSection">
+                                <t t-if="widget.event.selector_banner=='pic'">
+                                        <button class="buttons" id="goUrl">
+                                        <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
+                                            + (widget.event.id)
+                                            + '/banner/'}}"
+                                        />
+                                        </button>
+                                </t>
+                                <t t-elif="widget.event.selector_banner=='video'">
+                                    <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}"></iframe>
+                                </t>
+                                <t t-else="">
 
+                                </t>
+                            
                                 <img id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.event_url + '&amp;width=100&amp;height=100'}}" 
                                 />
-                            </div>
+                        </div>
                         <div id="descriptionContent">
                             <div id="description"><t t-esc="widget.event.description"/></div>
                         </div>
