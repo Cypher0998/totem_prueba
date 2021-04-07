@@ -9,6 +9,7 @@ class Company(models.Model):
 	event_duration = fields.Float()
 	company_qr = fields.Text()
 	company_refresh_time=fields.Float()
+	company_pop_up_time = fields.Float()
 
 	@api.model
 	def _get_default_company_description(self): 

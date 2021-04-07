@@ -15,7 +15,8 @@ class ResConfigSettings(models.TransientModel):
 		readonly=False)
 
 	refresh_time = fields.Float(string=_("Refresh Time"),related='company_id.company_refresh_time', readonly=False)
-		
+	pop_up_time = fields.Float(string=_("Pop-up Time"),related='company_id.company_pop_up_time', readonly=False)
+			
 	@api.constrains('company_description')
 	def _constrains_company_description(self):
 		if len(self.company_description) > 50:
@@ -34,5 +35,10 @@ class ResConfigSettings(models.TransientModel):
 	@api.constrains('refresh_time')
 	def _constrains_refresh_time(self):
 		if self.refresh_time < 0:
+			raise exceptions.ValidationError(_("El valor debe ser al menos 0 o superior"))
+		pass
+	@api.constrains('pop_up_time')
+	def _constrains_pop_up_time(self):
+		if self.pop_up_time < 0:
 			raise exceptions.ValidationError(_("El valor debe ser al menos 0 o superior"))
 		pass

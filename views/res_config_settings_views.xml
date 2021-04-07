@@ -24,6 +24,7 @@
                                 El valor 00:00 corresponde a un tiempo por defecto.
                             </div>
                             <div class="row mt16 o_settings_container">
+
                                 <div class="col-12 col-lg-6 o_setting_box">
                                     <label for="duration"/>
                                     <div class="text-muted">
@@ -36,9 +37,19 @@
                                     </div>
                                     <field name="event_duration" widget="float_time"/>
                                 </div>
+
                                 <div class="col-12 col-lg-6 o_setting_box">
                                     <label for="refresh_time"/>
+                                    <div class="text-muted">
+                                        Por defecto: 15:00 segundos.
+                                    </div>
                                     <field name="refresh_time" widget="float_time"/>
+
+                                    <label for="pop_up_time"/>
+                                    <div class="text-muted">
+                                        Por defecto: 35:00 segundos.
+                                    </div>
+                                    <field name="pop_up_time" widget="float_time"/>
                                 </div>
                             </div> 
                 </div>

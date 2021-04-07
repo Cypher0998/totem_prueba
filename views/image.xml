@@ -7,8 +7,8 @@
     <field name="priority" eval="16"/>
     <field name="arch" type="xml">
       <tree string="Lista de imágenes">
-        <field name="name"/>
-        <field name="my_image"/>
+        <field name="my_image" widget = "image" width = "150px" height = "150px"/>
+        <field name="name" width = "30px"/>
       </tree>
     </field>
   </record>
@@ -23,7 +23,7 @@
         <sheet>
           <group>
             <field name="name" required="1"/>
-            <field name="my_image" required="1"/>
+            <field name="my_image" required="1" widget = "image" width = "75px" height = "75px"/>
           </group>
         </sheet>
       </form>
@@ -37,5 +37,5 @@
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
-  <menuitem id="lista_imagenes" name="Lista de imágenes" parent="main_menu" action="image_list_action"/>
+  <!-- <menuitem id="lista_imagenes" name="Lista de imágenes" parent="main_menu" action="image_list_action"/> -->
 </odoo>

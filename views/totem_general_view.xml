@@ -10,7 +10,8 @@
         <field name="name"/>
         <!-- <field name="banner"/> -->
         <field name="description"/>
-        <field name="event_url"/>
+        <field name="selector_banner"/>
+        <field name="banner_url"/>
         <field name="initial_event_datetime"/>
         <field name="final_event_datetime"/>
       </tree>
@@ -27,33 +28,53 @@
         <sheet>
           <group rowspan="4">
             <group rowspan="2" row="2">
-              <field name="name"/>
+              <field name="name" required="1"/>
               <field name="description"/>
-              <field name="event_url" widget="url" required="1"/>
+              <!-- <field name="pop_up_qr_url" widget="url"/> -->
             </group>
             <group rowspan="2" row="2">
               <field name="selector_banner" required="1"/>
               <field name="banner" attrs="{'invisible':[('selector_banner','!=','pic')]}"/>
               <field name="banner_video" attrs="{'invisible':[('selector_banner','!=','video')]}" widget="url"/>
               <field name="banner_rss" attrs="{'invisible':[('selector_banner','!=','rss')]}" widget="url"/>
-              <field name="banner_url" widget="url"/>
+              <field name="banner_url" widget="url" required="1"/>
             </group>
           </group>
           <notebook>
             <page string="Image Slider">
-              <label for = "image_ids"/>
+              <label for = "image_ids"/> 
               <field name = "image_ids" required="1"/>
             </page>
+            
+            <page string="Pop-up's Information">
+              <group rowspan="4">
+                <group rowspan="2" row="2">
+                    <field name= "pop_up_image" widget = "image" width = "150px" />
+                </group>
+
+                <group rowspan="2" row="2">
+                    <field name="pop_up_product_name"/>
+                    <field name="pop_up_description"/> 
+                </group>
+              </group>
+
+              <group rowspan="2">
+                <field name="pop_up_qr_url" widget="url"/> 
+              </group>
+            </page>
+
             <page string="Event's Date">
               <group rowspan="4">
                 <group rowspan="2" row="2">
-                    <field name= "initial_event_datetime"/>
+                    <field name= "initial_event_datetime" widget = "datetime"/>
                 </group>
+                
                 <group rowspan="2" row="2">
                     <field name= "final_event_datetime"/>
                 </group>
               </group> 
             </page>
+
           </notebook>
         </sheet>
       </form>

@@ -13,6 +13,12 @@ odoo.define('totem_prueba.totem', function(require) {
 	var allMyEvents = {};
 	var event = null;
 
+	//Variables que recogen el popUp
+	var popUpTitulo;
+	var popUpDescription;
+	var popUpImage;
+	var popUpQR;
+
 	// Crear eventos de desplazamiento a la derecha y a la izquierda de los eventos
 	var TotemMode = AbstractAction.extend ({
 		eventTimeout: null,
@@ -31,6 +37,35 @@ odoo.define('totem_prueba.totem', function(require) {
 				this.clear();
 				this.backSlide();
 			}, 200, true),
+			"click #BotonBanner": _.debounce(function(){
+				let self = this;
+				let mainRouteImg = '/web/image/totem_general.totem_general/'+ self.popUpImage +'/pop_up_image/';
+				let routeQR = '/report/barcode/?type=QR&amp;value='+ self.popUpQR +'&amp;width=100&amp;height=100';
+				console.log(self.routeQR);
+				let popUp = open("", "Enlace", "width=800,height=800,fullscreen=yes");
+				popUp.document.write("<head>"+
+					"<title>This is 'myWindow'</title>"+
+					"</head>");
+				 popUp.document.write("<body>"+
+					"<link rel='stylesheet' href='/totem_prueba/static/src/scss/popUp.css'/>"+
+					"<h1 id='tituloPopUp'>"+self.popUpTitulo + "</h1>"+
+					"<img id='bannerPopUp' src="+ mainRouteImg  + ">" + "</img>" +
+					"<p id='descripcionPopUp'>"+ self.popUpDescription + "</p>" +
+					"<img id='qrPopUp' src="+ routeQR + ">" + "</img>" +
+					"</body>");
+
+				/*popUp.document.write("<body>"+
+					"<link rel='stylesheet' href='/totem_prueba/static/src/scss/popUp.css'/>"+
+					"<img id='bannerPopUp' src="+ self.mainRoute + self.popUpImage + self.banner+"/>"+
+					"<p id='descripcionPopUp'>"+self.popUpDescription + "</p>"+
+					"</body>");*/
+
+				popUp.resizeTo(1080,1920);
+				popUp.focus();
+				setTimeout( function(){
+					popUp.close();
+				},35000);
+			},200, true),
 
 		},
 
@@ -102,6 +137,9 @@ odoo.define('totem_prueba.totem', function(require) {
 				self.allMyEvents = res;
 				console.log("allmyevents: " + self.allMyEvents)
 	            self.event = res[self.i];
+	            /*self.popUpDescription = self.event.pop_up_description;
+	            self.popUpQR = self.event.pop_up_qr_url;
+	            self.popUpImage = self.event.pop_up_image;*/
 	            console.log("primer: " + self.event.image_ids);
 	            self.company_description = self.datos_company.company_description;
 				self.company_qr = self.datos_company.company_qr;
@@ -135,6 +173,10 @@ odoo.define('totem_prueba.totem', function(require) {
 			self.clear();
 			// console.log(self.allMyEvents)
 			self.event = self.allMyEvents[self.i];
+			self.popUpTitulo = self.event.pop_up_product_name;
+			self.popUpDescription = self.event.pop_up_description;
+	        self.popUpQR = self.event.pop_up_qr_url;
+	        self.popUpImage = self.event.id;
 			self.$el.html(QWeb.render("TotemModeMenu", {widget: self}));
 			// console.log($(".myImgSlider"))
 			 setTimeout(() =>{
