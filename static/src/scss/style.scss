@@ -142,7 +142,7 @@
 }
 #footerContent{
 
-  text-align:left;
+  text-align:center;
   color : white;
   font-size: xx-large;
 }
@@ -159,7 +159,40 @@
   width:100%;
 }
 
+.modal-header{
+  position:relative;
+  display: flex;
+  align-items: right;
+  text-align:right;
+}
+#crossImg{
+  heigth:100%;
+  width:100%;
+}
+#closeButton{
+  position:absolute;
+  right:5px;
+  top:0; 
+  text-align:right;
+  border-color: transparent;
+  background-color: transparent;
+  heigth:5%;
+  width:5%;
+}
+.modal-body{
+  position:relative;
+}
+.modal-title{
+  right:20px;
+}
+#descriptionPopUp{
+  position:absolute;
+  right:20px;
+}
 
+.column{
+  display: table-cell;
+}
 
 
 

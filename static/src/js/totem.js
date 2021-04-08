@@ -10,14 +10,10 @@ odoo.define('totem_prueba.totem', function(require) {
 	var datos_company;
 	var duraciones_de_evento;
 	var sacar_duration;
+	var refreshTime;
+	var popUpTime;
 	var allMyEvents = {};
 	var event = null;
-
-	//Variables que recogen el popUp
-	var popUpTitulo;
-	var popUpDescription;
-	var popUpImage;
-	var popUpQR;
 
 	// Crear eventos de desplazamiento a la derecha y a la izquierda de los eventos
 	var TotemMode = AbstractAction.extend ({
@@ -27,7 +23,8 @@ odoo.define('totem_prueba.totem', function(require) {
 		myCarrousel: null,
 		sliderIndex: 0,
 		slides : {},
-		event: {},
+		modalBool: false,
+        modalTimer: null,
 		events: {
 			"click #leftArrowButton": _.debounce(function() {
 				this.clear();
@@ -37,37 +34,59 @@ odoo.define('totem_prueba.totem', function(require) {
 				this.clear();
 				this.backSlide();
 			}, 200, true),
-			"click #BotonBanner": _.debounce(function(){
-				let self = this;
-				let mainRouteImg = '/web/image/totem_general.totem_general/'+ self.popUpImage +'/pop_up_image/';
-				let routeQR = '/report/barcode/?type=QR&amp;value='+ self.popUpQR +'&amp;width=100&amp;height=100';
-				console.log(self.routeQR);
-				let popUp = open("", "Enlace", "width=800,height=800,fullscreen=yes");
-				popUp.document.write("<head>"+
-					"<title>This is 'myWindow'</title>"+
-					"</head>");
-				 popUp.document.write("<body>"+
-					"<link rel='stylesheet' href='/totem_prueba/static/src/scss/popUp.css'/>"+
-					"<h1 id='tituloPopUp'>"+self.popUpTitulo + "</h1>"+
-					"<img id='bannerPopUp' src="+ mainRouteImg  + ">" + "</img>" +
-					"<p id='descripcionPopUp'>"+ self.popUpDescription + "</p>" +
-					"<img id='qrPopUp' src="+ routeQR + ">" + "</img>" +
-					"</body>");
-
-				/*popUp.document.write("<body>"+
-					"<link rel='stylesheet' href='/totem_prueba/static/src/scss/popUp.css'/>"+
-					"<img id='bannerPopUp' src="+ self.mainRoute + self.popUpImage + self.banner+"/>"+
-					"<p id='descripcionPopUp'>"+self.popUpDescription + "</p>"+
-					"</body>");*/
-
-				popUp.resizeTo(1080,1920);
-				popUp.focus();
-				setTimeout( function(){
-					popUp.close();
-				},35000);
+			"click #centerColumn": _.debounce(function(){
+				var self = this;
+                setTimeout(function(){self.modalBool = true;},0);
+                console.log("1");
+                self.eventTimeout.pause();
+                $("#myPopUp").modal({show: true});
+                self.modalTimer = setTimeout(function(){
+                    if(self.modalBool){
+                        $("#myPopUp").modal('hide');
+                        $("#myPopUp").on('hidden.bs.modal', function(e){
+                            self.eventTimeout.resume()
+                            self.modalBool = false;
+                        });
+                    }
+				},self.popUpTime);
 			},200, true),
 
-		},
+			"click #closeButton": _.debounce(function() {
+                var self = this;
+                console.log("Esto no entra");
+                if(self.modalBool){
+                    console.log("2");
+                    $("#myPopUp").modal('hide');
+                    self.eventTimeout.resume()
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                }
+            }, 200, true),
+            "click #contenedor": _.debounce(function() {
+                var self = this;
+                console.log("Prueba 1");
+                if(self.modalBool){
+                    console.log("2");
+                    $("#myPopUp").modal('hide');
+                    self.eventTimeout.resume()
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                }
+            }, 200, true),
+            "click #cancelarButton": _.debounce(function() {
+                var self = this;
+                console.log("Prueba 2");
+                if(self.modalBool){
+                    console.log("2");
+                    $("#myPopUp").modal('hide');
+                    self.eventTimeout.resume()
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                }
+            }, 200, true),
+        },
+        
+
 
 		start: async function () {
 			await this.descargarConfigs();
@@ -76,7 +95,7 @@ odoo.define('totem_prueba.totem', function(require) {
 
 		clear: function() {
 			clearTimeout(this.myCarrousel);
-			clearTimeout(this.eventimeout);
+			clearTimeout(this.eventTimeout);
 		},
 		// Funcion que carga los datos del modelo de totem_general
 		config: function() {
@@ -114,7 +133,7 @@ odoo.define('totem_prueba.totem', function(require) {
 			var def = await this._rpc({
 				model: 'res.company',
 				method: 'search_read',
-				args:[[], ['company_qr','company_description','event_duration']],
+				args:[[], ['company_qr','company_description','event_duration','company_refresh_time','company_pop_up_time']],
 			})
 			.then(function(res) {
 				self.datos_company = res[0];
@@ -122,7 +141,17 @@ odoo.define('totem_prueba.totem', function(require) {
 					self.datos_company.event_duration=10;
 				}
 
-				self.sacar_duration=(self.datos_company.event_duration *1000);
+				self.sacar_duration=(self.datos_company.event_duration * 1000);
+
+				if (self.datos_company.company_refresh_time == 0){
+					self.datos_company.company_refresh_time = 15;
+				}
+				self.refreshTime=(self.datos_company.company_refresh_time * 1000);
+
+				if(self.datos_company.company_pop_up_time == 0){
+					self.datos_company.company_pop_up_time = 35;
+				}
+				self.popUpTime = (self.datos_company.company_pop_up_time * 1000);
 			});
 		}, 
 
@@ -133,18 +162,15 @@ odoo.define('totem_prueba.totem', function(require) {
 				method: 'search_read',
 			})
 			.then(function (res) {
+				clearTimeout(self.myCarrousel);
 				self.i = 0;
 				self.allMyEvents = res;
 				console.log("allmyevents: " + self.allMyEvents)
 	            self.event = res[self.i];
-	            /*self.popUpDescription = self.event.pop_up_description;
-	            self.popUpQR = self.event.pop_up_qr_url;
-	            self.popUpImage = self.event.pop_up_image;*/
 	            console.log("primer: " + self.event.image_ids);
 	            self.company_description = self.datos_company.company_description;
 				self.company_qr = self.datos_company.company_qr;
-				self.rebootTimeout();
-				
+				self.rebootTimeout();	
 			});
 		},
 
@@ -173,24 +199,54 @@ odoo.define('totem_prueba.totem', function(require) {
 			self.clear();
 			// console.log(self.allMyEvents)
 			self.event = self.allMyEvents[self.i];
-			self.popUpTitulo = self.event.pop_up_product_name;
-			self.popUpDescription = self.event.pop_up_description;
-	        self.popUpQR = self.event.pop_up_qr_url;
-	        self.popUpImage = self.event.id;
 			self.$el.html(QWeb.render("TotemModeMenu", {widget: self}));
 			// console.log($(".myImgSlider"))
 			 setTimeout(() =>{
 			 		$(".o_totem_prueba_totem_mode_footer").html(QWeb.render("ConfigsData", {widget: self.datos_company}));
 			 },0);
-			console.log("segundo: " + self.event.image_ids);
+			self.backup(self.refreshTime*60);
 			setTimeout(() => {self.config();},0);
 
-			self.eventTimeout = setTimeout(function(){
+			self.eventTimeout = new Timer(function(){
 				self.clear();
 				self.nextSlide();
 			},  self.sacar_duration);
 		},
+        backup: function(tiempo_refresco){
+            var self = this;
+            setTimeout(() => {
+                $("#mymodal").modal('hide');
+                $("#mymodal").on('hidden.bs.modal', function(e){
+                    if(self.eventTimeout!=null)
+                        self.eventTimeout.clearTimeout();
+                    clearTimeout(self.modalTimer);
+                    self.modalBool = false;
+                    self.start();
+                });
+            }, tiempo_refresco - 1500);
+        },
 	});
+
+		function Timer(callback, delay) {
+        var timerId, start, remaining = delay;
+    	let self=this;
+        self.pause = function() {
+            window.clearTimeout(self.timerId);
+            self.remaining -= new Date() - self.start;
+        };
+    
+        self.resume = function() {
+            self.start = new Date();
+            window.clearTimeout(self.timerId);
+            self.timerId = window.setTimeout(callback, remaining);
+        };
+
+        self.clearTimeout = function() {
+            window.clearTimeout(self.timerId);
+        }
+    
+        self.resume();
+    }
 
 	core.action_registry.add('totem_prueba_totem', TotemMode);
 	return TotemMode;

@@ -28,12 +28,12 @@
                                 <div class="col-12 col-lg-6 o_setting_box">
                                     <label for="duration"/>
                                     <div class="text-muted">
-                                        Por defecto: 10:00 segundos.
+                                        Por defecto: 4:00 segundos.
                                     </div>
                                     <field name="duration" widget="float_time"/>
                                     <label for="event_duration"/>
                                     <div class="text-muted">
-                                        Por defecto: 4:00 segundos.
+                                        Por defecto: 10:00 segundos.
                                     </div>
                                     <field name="event_duration" widget="float_time"/>
                                 </div>

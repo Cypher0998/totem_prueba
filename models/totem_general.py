@@ -52,14 +52,12 @@ class totem_general(models.Model):
 		BAD_WATCH = SLASH + WATCH + SPECIAL_WATCH_EXTENSION
 		CORRECT_WATCH = SLASH + WATCH + QUESTION_MARK + V_EQUAL
 
-		print ("\n\n\n\n")
-		print (type(BAD_EMBED))
-		print ("\n\n\n\n")
-		if not re.search(BAD_EMBED, self.banner_video):
-			self.banner_video = self.banner_video[:24] + EMBED + self.banner_video[24:]
-		if re.search(BAD_WATCH,self.banner_video):
-			self.banner_video = self.banner_video.replace(CORRECT_WATCH, SLASH)
-		self.video_id = self.banner_video[30:]
+		if self.banner_video is True:
+			if not re.search(BAD_EMBED, self.banner_video):
+				self.banner_video = self.banner_video[:24] + EMBED + self.banner_video[24:]
+			if re.search(BAD_WATCH,self.banner_video):
+				self.banner_video = self.banner_video.replace(CORRECT_WATCH, SLASH)
+			self.video_id = self.banner_video[30:]
 		pass
 
 
@@ -68,17 +66,39 @@ class totem_general(models.Model):
 	def _constrains_description(self):
 		CHARACTER_BOUNDARY = 'Límite de caracteres '
   
-		if len(self.description) > 200:
+		if len(self.description) > 250:
 			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '250')) 
 		pass
+
 	@api.constrains('name')
 	def _constrains_name(self):
 		CHARACTER_BOUNDARY = 'Límite de caracteres '
-		if len(self.name) > 30:
+		if len(self.name) > 80:
 			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80'))
 		pass
 
-	@api.onchange('event_url','banner_url')
-	def _onchange_field_name(self):
-		if self.event_url:
-			self.banner_url = self.event_url
+	@api.constrains('pop_up_description')
+	def _constrains_description(self):
+		CHARACTER_BOUNDARY = 'Límite de caracteres '
+  
+		if len(self.description) > 400:
+			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '400')) 
+		pass
+
+	@api.constrains('pop_up_qr_url')
+	def _constrains_description(self):
+		CHARACTER_BOUNDARY = 'Límite de caracteres '
+  
+		if len(self.description) > 250:
+			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '250')) 
+		pass
+
+	@api.constrains('pop_up_product_name')
+	def _constrains_description(self):
+		CHARACTER_BOUNDARY = 'Límite de caracteres '
+  
+		if len(self.description) > 80:
+			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80')) 
+		pass
+
+
