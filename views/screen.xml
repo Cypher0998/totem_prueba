@@ -25,6 +25,7 @@
             <field name = "name" required="1"/>
             <field name = "description" />
             <field name = "event_ids"/>
+            <field name = "userController"/>
           </group>
         </sheet>
       </form>

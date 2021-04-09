@@ -95,7 +95,7 @@ odoo.define('totem_prueba.totem', function(require) {
 
 		clear: function() {
 			clearTimeout(this.myCarrousel);
-			clearTimeout(this.eventTimeout);
+			this.eventTimeout.clearTimeout();
 		},
 		// Funcion que carga los datos del modelo de totem_general
 		config: function() {
@@ -159,15 +159,14 @@ odoo.define('totem_prueba.totem', function(require) {
 			let self = this;		
 			var def =  await this._rpc({
 				model: 'totem_general.totem_general',
-				method: 'search_read',
+				method: 'get_events_by_screen',
+				args: [this.getSession().uid, ],
 			})
 			.then(function (res) {
 				clearTimeout(self.myCarrousel);
 				self.i = 0;
 				self.allMyEvents = res;
-				console.log("allmyevents: " + self.allMyEvents)
 	            self.event = res[self.i];
-	            console.log("primer: " + self.event.image_ids);
 	            self.company_description = self.datos_company.company_description;
 				self.company_qr = self.datos_company.company_qr;
 				self.rebootTimeout();	
@@ -196,7 +195,7 @@ odoo.define('totem_prueba.totem', function(require) {
 
 		rebootTimeout: async function() {
 			let self = this;
-			self.clear();
+			//self.clear();
 			// console.log(self.allMyEvents)
 			self.event = self.allMyEvents[self.i];
 			self.$el.html(QWeb.render("TotemModeMenu", {widget: self}));

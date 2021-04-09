@@ -86,34 +86,46 @@
                 <div class="modal fade" id="myPopUp" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">
-                                    <img src="/totem_prueba/static/src/img/cross.png" id="crossImg" />
-                                </button>
-                            </div>
-                            <div class="modal-body" style="display:table;">
-                                
-                                <div class="column">
-                                    <img t-attf-src="{{'/web/image/totem_general.totem_general/' + widget.event.id + '/pop_up_image/'}}" style="width:200px;height:150px;"/>
+                    
+                                <div class="modal-header">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">
+                                        <img src="/totem_prueba/static/src/img/cross.png" id="crossImg" />
+                                    </button>
                                 </div>
-                            <div class="column" style="position:relative;width:400px">
-                                    <h3 class="modal-title" id="exampleModalLongTitle" style="position:absolute;top:0;">
-                                        <t t-esc="widget.event.pop_up_product_name"/> 
-                                     </h3>
-                                     
-                                    <t t-esc="widget.event.pop_up_description"/>
+
+                                <div class="modal-body">
+                                    <div class = "container-fluid">
+                                        <div class = "row">
+                                            <div class="col-md-4 col-sm-4" >
+                                                <img t-attf-src="{{'/web/image/totem_general.totem_general/' + widget.event.id + '/pop_up_image/'}}" style="width:175px;height:225px;"/>
+                                            </div>
+
+                                        <!-- <div class="column" style="position:relative;width:400px"> -->
+                                            <div class="col-md-8 col-sm-8" >
+                                                <div class="row">
+                                                    <p>
+                                                        <h3 class="modal-title" id="exampleModalLongTitle">
+                                                                 <t t-esc="widget.event.pop_up_product_name"/>
+                                                         </h3>
+                                                    </p>
+                                                    <t t-esc="widget.event.pop_up_description"/> 
+                                                </div>
+                                                <div class="row justify-content-end" id="QrPopUp">
+                                                    <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=50&amp;height=50'}}"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                        
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelarButton">
-                                   Cancelar 
-                                </button>
-                                <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=100&amp;height=100'}}"/>
+                                </div>
+
+                                <div class="modal-footer" id="cancelarContenedor">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelarButton">
+                                       Cancelar 
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <!-- CIERRE DEL MODAL -->
         </div>

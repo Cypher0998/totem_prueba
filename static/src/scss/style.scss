@@ -190,8 +190,19 @@
   right:20px;
 }
 
-.column{
-  display: table-cell;
+#QrPopUp{
+  margin-right:1%;
+  margin-top:5%;
+}
+
+#cancelarContenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#cancelarButton{
+  text-align:center;
+  width:100px;
 }
 
 

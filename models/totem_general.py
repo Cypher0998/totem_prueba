@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
+from urllib.request import urlopen
+from xml.etree.ElementTree import parse
 import logging, re
 
 _logger=logging.getLogger(__name__)
@@ -61,6 +63,15 @@ class totem_general(models.Model):
 		pass
 
 
+	@api.model
+	def get_events_by_screen(self,uid):
+
+		events_id = self.env['screen.screen'].search_read([('userController','=',uid)])
+		user_events= self.env['totem_general.totem_general'].search_read([('id','in',events_id[0]['event_ids'])],
+			['name','description','banner_url','banner_video','banner_rss','selector_banner',
+			'video_id','image_ids','initial_event_datetime','final_event_datetime','pop_up_product_name',
+			'pop_up_description','pop_up_qr_url'])
+		return user_events
 
 	@api.constrains('description')
 	def _constrains_description(self):
@@ -77,13 +88,13 @@ class totem_general(models.Model):
 			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80'))
 		pass
 
-	@api.constrains('pop_up_description')
-	def _constrains_description(self):
-		CHARACTER_BOUNDARY = 'Límite de caracteres '
+	# @api.constrains('pop_up_description')
+	# def _constrains_description(self):
+	# 	CHARACTER_BOUNDARY = 'Límite de caracteres '
   
-		if len(self.description) > 400:
-			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '400')) 
-		pass
+	# 	if len(self.description) > 400:
+	# 		raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '400')) 
+	# 	pass
 
 	@api.constrains('pop_up_qr_url')
 	def _constrains_description(self):
