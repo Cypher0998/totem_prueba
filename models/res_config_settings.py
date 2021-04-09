@@ -19,8 +19,8 @@ class ResConfigSettings(models.TransientModel):
 			
 	@api.constrains('company_description')
 	def _constrains_company_description(self):
-		if len(self.company_description) > 50:
-			raise exceptions.ValidationError(_("Límite de caracteres 50")) 
+		if len(self.company_description) > 100:
+			raise exceptions.ValidationError(_("Límite de caracteres 75")) 
 		pass
 	@api.constrains('event_duration')
 	def _constrains_event_duration(self):

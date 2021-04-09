@@ -167,6 +167,7 @@ odoo.define('totem_prueba.totem', function(require) {
 				self.i = 0;
 				self.allMyEvents = res;
 	            self.event = res[self.i];
+	            console.log(self.event.banner_rss);
 	            self.company_description = self.datos_company.company_description;
 				self.company_qr = self.datos_company.company_qr;
 				self.rebootTimeout();	

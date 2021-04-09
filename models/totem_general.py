@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
+from odoo import models, fields, api, _, exceptions
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
+from xml.dom import minidom
 import logging, re
 
 _logger=logging.getLogger(__name__)
@@ -71,7 +72,58 @@ class totem_general(models.Model):
 			['name','description','banner_url','banner_video','banner_rss','selector_banner',
 			'video_id','image_ids','initial_event_datetime','final_event_datetime','pop_up_product_name',
 			'pop_up_description','pop_up_qr_url'])
+
+		for i in user_events:
+			if i['selector_banner']=='rss':
+				banner_playlist = self.parse_rss_video_ids(self.get_RSS_data(i['banner_rss']))
+				# _logger.info(banner_playlist + " 500")
+				i['banner_rss'] = banner_playlist
+				# _logger.info(i['banner_rss'] + " 500")
+
+		_logger.info(str(user_events[0]['banner_rss']) + " 500")
+
+				
+
 		return user_events
+
+	def get_RSS_data(self,RSS_url):
+		get_XML_from_url = urlopen(RSS_url)
+		data_from_XML = minidom.parse(get_XML_from_url)
+		return self.obtain_rss_video_ids(data_from_XML)
+		pass
+
+
+	def obtain_rss_video_ids(self,RSS_data):
+		media=[]
+		iterador = 0
+
+		for i in RSS_data.getElementsByTagName('media:content'):
+			id_video = str(i.attributes['url'].value)
+			id_video = id_video.replace('?version=3','')
+			id_video = id_video.replace('https://www.youtube.com/v/','')
+			
+			media.append(id_video)
+			# _logger.info(media[iterador] + " 500")
+			iterador+=1
+
+		return media
+		pass
+
+	def parse_rss_video_ids(self,ids_list):
+		final_string = "https://www.youtube.com/embed/"
+
+		final_string += ids_list[0] + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="
+
+		# _logger.info(final_string + " 500")
+
+		for iterator_list in ids_list:
+			final_string += iterator_list + ','
+
+		final_string = final_string[:-1]
+		# _logger.info(final_string + " 500")
+		return final_string
+
+	
 
 	@api.constrains('description')
 	def _constrains_description(self):
@@ -111,5 +163,7 @@ class totem_general(models.Model):
 		if len(self.description) > 80:
 			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80')) 
 		pass
+
+
 
 

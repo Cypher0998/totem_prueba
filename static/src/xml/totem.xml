@@ -40,8 +40,8 @@
                                     <t t-elif="widget.event.selector_banner=='video'">
                                         <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}"></iframe>
                                     </t>
-                                    <t t-else="">
-
+                                    <t t-if="widget.event.selector_banner=='rss'">
+                                        <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}"></iframe>
                                     </t>
                                 </div>
                                     <img id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=100&amp;height=100'}}" 
@@ -83,9 +83,9 @@
                 </div> 
 
                 <!-- MODAL -->                
-                <div class="modal fade" id="myPopUp" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal fade modal-perl" id="myPopUp" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
+                        <div class="modal-content" id = "template1_pop_up">
                     
                                 <div class="modal-header">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">
@@ -97,7 +97,7 @@
                                     <div class = "container-fluid">
                                         <div class = "row">
                                             <div class="col-md-4 col-sm-4" >
-                                                <img t-attf-src="{{'/web/image/totem_general.totem_general/' + widget.event.id + '/pop_up_image/'}}" style="width:175px;height:225px;"/>
+                                                <img t-attf-src="{{'/web/image/totem_general.totem_general/' + widget.event.id + '/pop_up_image/'}}" style="width:200px;height:270px;margin-left: -9%;"/>
                                             </div>
 
                                         <!-- <div class="column" style="position:relative;width:400px"> -->
@@ -111,7 +111,7 @@
                                                     <t t-esc="widget.event.pop_up_description"/> 
                                                 </div>
                                                 <div class="row justify-content-end" id="QrPopUp">
-                                                    <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=50&amp;height=50'}}"/>
+                                                    <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=95&amp;height=90'}}"/>
                                                 </div>
                                             </div>
                                         </div>

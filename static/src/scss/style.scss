@@ -7,6 +7,7 @@
    height: 100%;
    width: 100% ;
 }
+
 .o_totem_prueba_totem_mode_text_header{
   display: flex;
   align-items: center;
@@ -159,12 +160,14 @@
   width:100%;
 }
 
-.modal-header{
-  position:relative;
-  display: flex;
-  align-items: right;
-  text-align:right;
+#rss_video{
+  position:absolute;
+  padding-top:20px;
+  height:67.5%;
+  width:100%;
 }
+
+
 #crossImg{
   heigth:100%;
   width:100%;
@@ -179,11 +182,29 @@
   heigth:5%;
   width:5%;
 }
-.modal-body{
+
+/* Estilos de modal */
+
+#template1_pop_up {
+    background: #d5d4c3 !important;
+    border: 1.5px solid grey;
+}
+
+.modal-header{
   position:relative;
+  display: flex;
+  align-items: right;
+  text-align:right;
 }
 .modal-title{
   right:20px;
+}
+.modal-body {
+  position:relative;
+}
+
+.modal-perl .modal-backdrop{
+   background-color: #d5d4c3 ;
 }
 #descriptionPopUp{
   position:absolute;
