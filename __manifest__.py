@@ -32,6 +32,8 @@
         # 'views/views.xml',
         'views/templates.xml',
         'views/full_screen.xml',
+        'views/my_date.xml',
+        'views/my_time.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

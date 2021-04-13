@@ -51,7 +51,40 @@
                                     </div>
                                     <field name="pop_up_time" widget="float_time"/>
                                 </div>
-                            </div> 
+                            </div>
+                        <h2>Temas del Tótem</h2>
+                        <div class="text-muted">
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                En caso de no escoger, ninguna imagen, se asignará un tema por defecto.
+                        </div>
+                        
+                        <div class="row mt16 o_settings_container">
+                                <div class="col-4 col-lg-4 o_setting_box" style="padding:3%">
+                                    <label for="general_background"/>
+                                    <field name="general_background" widget = "image" width = "100px"/>
+                                    <p>
+                                        <label for="text_color_general"/>
+                                        <field name="text_color_general"/>
+                                    </p>
+                                </div>
+
+                                <div class="col-4 col-lg-4 o_setting_box" style="padding:3%">
+                                        <label for="header_background"/>
+                                        <field name="header_background" widget = "image" width = "100px"/>
+                                        <p>
+                                            <label for="text_color_header"/>
+                                            <field name="text_color_header"/>
+                                        </p>
+                                </div>
+                                <div class="col-4 col-lg-4 o_setting_box" style="padding:3%">
+                                    <label for="footer_background"/>
+                                    <field name="footer_background" widget = "image" width = "100px"/>
+                                    <p>
+                                        <label for="text_color_footer"/>
+                                        <field name="text_color_footer"/>
+                                    </p>
+                                </div>
+                        </div> 
                 </div>
             </xpath>
         </field>

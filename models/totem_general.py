@@ -9,8 +9,12 @@ import logging, re
 _logger=logging.getLogger(__name__)
 
 class totem_general(models.Model):
-
 	_name = 'totem_general.totem_general'
+
+	# CONSTANT VARS
+	CHARACTER_BOUNDARY_MESSAGE = 'Límite de caracteres '
+	NORMAL_LIMIT_CHARACTER = 80
+	EXTENSE_LIMIT_CHARACTER = 250
 
 	# General fields
 	name = fields.Char(string = _('Name'))
@@ -36,12 +40,13 @@ class totem_general(models.Model):
 	initial_event_datetime = fields.Datetime(string = _("Initial Date"))
 	final_event_datetime = fields.Datetime(string = _("Final Date"))
 
+	my_event_dates = fields.One2many('my_date.my_date', 'assigned_event',  string = _("Event Date Set"))
+
 	# Pop Up's Information fields
 	pop_up_product_name = fields.Text(string = _('Product name'))
 	pop_up_image = fields.Binary(string = _('Pop-up Image'))
 	pop_up_description = fields.Text(string = _('Description'))
 	pop_up_qr_url = fields.Text(string = _('Pop-up QR'))
-
 
 	@api.onchange('banner_video', 'video_id')
 	def _onchange_(self):
@@ -54,35 +59,34 @@ class totem_general(models.Model):
 		SPECIAL_WATCH_EXTENSION = '\?v\='
 		BAD_WATCH = SLASH + WATCH + SPECIAL_WATCH_EXTENSION
 		CORRECT_WATCH = SLASH + WATCH + QUESTION_MARK + V_EQUAL
+		TRUE = True
+		TWENTY_FOR = 24
+		THIRTY = 30
 
-		if self.banner_video is True:
+		if self.banner_video is TRUE:
 			if not re.search(BAD_EMBED, self.banner_video):
-				self.banner_video = self.banner_video[:24] + EMBED + self.banner_video[24:]
+				self.banner_video = self.banner_video[:TWENTY_FOR] + EMBED + self.banner_video[TWENTY_FOR:]
 			if re.search(BAD_WATCH,self.banner_video):
 				self.banner_video = self.banner_video.replace(CORRECT_WATCH, SLASH)
-			self.video_id = self.banner_video[30:]
+			self.video_id = self.banner_video[THIRTY:]
 		pass
 
 
 	@api.model
 	def get_events_by_screen(self,uid):
-
 		events_id = self.env['screen.screen'].search_read([('userController','=',uid)])
-		user_events= self.env['totem_general.totem_general'].search_read([('id','in',events_id[0]['event_ids'])],
-			['name','description','banner_url','banner_video','banner_rss','selector_banner',
-			'video_id','image_ids','initial_event_datetime','final_event_datetime','pop_up_product_name',
-			'pop_up_description','pop_up_qr_url'])
+		user_events = []
 
-		for i in user_events:
-			if i['selector_banner']=='rss':
-				banner_playlist = self.parse_rss_video_ids(self.get_RSS_data(i['banner_rss']))
-				# _logger.info(banner_playlist + " 500")
-				i['banner_rss'] = banner_playlist
-				# _logger.info(i['banner_rss'] + " 500")
-
-		_logger.info(str(user_events[0]['banner_rss']) + " 500")
-
-				
+		if len(events_id) > 0:
+			user_events= self.env['totem_general.totem_general'].search_read([('id','in',events_id[0]['event_ids'])],
+				['name','description','banner_url','banner_video','banner_rss','selector_banner',
+				'video_id','image_ids','initial_event_datetime','final_event_datetime','pop_up_product_name',
+				'pop_up_description','pop_up_qr_url'])
+			
+			for i in user_events:
+				if i['selector_banner']=='rss':
+					banner_playlist = self.parse_rss_video_ids(self.get_RSS_data(i['banner_rss']))
+					i['banner_rss'] = banner_playlist		
 
 		return user_events
 
@@ -90,7 +94,7 @@ class totem_general(models.Model):
 		get_XML_from_url = urlopen(RSS_url)
 		data_from_XML = minidom.parse(get_XML_from_url)
 		return self.obtain_rss_video_ids(data_from_XML)
-		pass
+		
 
 
 	def obtain_rss_video_ids(self,RSS_data):
@@ -103,65 +107,53 @@ class totem_general(models.Model):
 			id_video = id_video.replace('https://www.youtube.com/v/','')
 			
 			media.append(id_video)
-			# _logger.info(media[iterador] + " 500")
 			iterador+=1
 
 		return media
-		pass
+		
 
 	def parse_rss_video_ids(self,ids_list):
 		final_string = "https://www.youtube.com/embed/"
 
 		final_string += ids_list[0] + "?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist="
 
-		# _logger.info(final_string + " 500")
-
 		for iterator_list in ids_list:
 			final_string += iterator_list + ','
 
 		final_string = final_string[:-1]
-		# _logger.info(final_string + " 500")
 		return final_string
 
 	
 
-	@api.constrains('description')
+	@api.constrains('description', 'CHARACTER_BOUNDARY', 'EXTENSE_LIMIT_CHARACTER')
 	def _constrains_description(self):
-		CHARACTER_BOUNDARY = 'Límite de caracteres '
-  
-		if len(self.description) > 250:
-			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '250')) 
+		if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
+			raise exceptions.ValidationError(
+				_(self.CHARACTER_BOUNDARY + self.EXTENSE_LIMIT_CHARACTER)) 
 		pass
 
-	@api.constrains('name')
+	@api.constrains('name', 'CHARACTER_BOUNDARY', 'NORMAL_LIMIT_CHARACTER')
 	def _constrains_name(self):
-		CHARACTER_BOUNDARY = 'Límite de caracteres '
-		if len(self.name) > 80:
-			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80'))
+		if len(self.name) > self.NORMAL_LIMIT_CHARACTER:
+			raise exceptions.ValidationError(
+				_(self.CHARACTER_BOUNDARY + self.NORMAL_LIMIT_CHARACTER))
 		pass
 
-	# @api.constrains('pop_up_description')
-	# def _constrains_description(self):
-	# 	CHARACTER_BOUNDARY = 'Límite de caracteres '
-  
-	# 	if len(self.description) > 400:
-	# 		raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '400')) 
-	# 	pass
 
-	@api.constrains('pop_up_qr_url')
-	def _constrains_description(self):
-		CHARACTER_BOUNDARY = 'Límite de caracteres '
-  
-		if len(self.description) > 250:
-			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '250')) 
+	@api.constrains('pop_up_qr_url', 'CHARACTER_BOUNDARY','EXTENSE_LIMIT_CHARACTER')
+	def _constrains_description(self): 
+		if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
+			raise exceptions.ValidationError(
+				_(self.CHARACTER_BOUNDARY + 
+					self.EXTENSE_LIMIT_CHARACTER)) 
 		pass
 
-	@api.constrains('pop_up_product_name')
-	def _constrains_description(self):
-		CHARACTER_BOUNDARY = 'Límite de caracteres '
-  
-		if len(self.description) > 80:
-			raise exceptions.ValidationError(_(CHARACTER_BOUNDARY + '80')) 
+	@api.constrains('pop_up_product_name', 'CHARACTER_BOUNDARY', 'NORMAL_LIMIT_CHARACTER')
+	def _constrains_description(self):  
+		if len(self.description) > self.NORMAL_LIMIT_CHARACTER:
+			raise exceptions.ValidationError(
+				_(self.CHARACTER_BOUNDARY_MESSAGE + 
+					self.NORMAL_LIMIT_CHARACTER)) 
 		pass
 
 

@@ -10,6 +10,21 @@ class Company(models.Model):
 	company_qr = fields.Text()
 	company_refresh_time=fields.Float()
 	company_pop_up_time = fields.Float()
+	company_header_background = fields.Binary()
+	company_general_background = fields.Binary()
+	company_footer_background = fields.Binary()
+	text_color_header = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		])
+	text_color_general = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		])
+	text_color_footer = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		])
 
 	@api.model
 	def _get_default_company_description(self): 

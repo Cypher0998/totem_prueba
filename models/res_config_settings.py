@@ -16,7 +16,28 @@ class ResConfigSettings(models.TransientModel):
 
 	refresh_time = fields.Float(string=_("Refresh Time"),related='company_id.company_refresh_time', readonly=False)
 	pop_up_time = fields.Float(string=_("Pop-up Time"),related='company_id.company_pop_up_time', readonly=False)
-			
+
+	header_background = fields.Binary(related = 'company_id.company_header_background', readonly=False)
+	general_background = fields.Binary(related = 'company_id.company_general_background', readonly=False)
+	footer_background = fields.Binary(related = 'company_id.company_footer_background', readonly=False)
+	text_color_header = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		],
+		related='company_id.text_color_header', readonly=False, string=_("Header's Text Color"))
+
+	text_color_general = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		],
+		related='company_id.text_color_general', readonly=False, string=_("General's Text Color"))
+
+	text_color_footer = fields.Selection([
+		('black','Negro'),
+		('white','Blanco'),
+		],
+		related='company_id.text_color_footer', readonly=False, string=_("Footer's Text Color"))
+
 	@api.constrains('company_description')
 	def _constrains_company_description(self):
 		if len(self.company_description) > 100:

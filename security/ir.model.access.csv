@@ -1,6 +1,16 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
 access_totem_general_totem_general,totem_general.totem_general,model_totem_general_totem_general,,1,1,1,1
+
 access_image_image,image.image,model_image_image,,1,1,1,1
+
 access_res_company,res.company,model_res_company,,1,1,1,1
+
 access_res_config_settings,res.config.settings,model_res_config_settings,,1,1,1,1
+
 access_screen_screen,screen.screen,model_screen_screen,,1,1,1,1
+
+access_my_date_my_date,my_date.my_date,model_my_date_my_date,,1,1,1,1
+
+access_my_time_my_time,my_time.my_time,model_my_time_my_time,,1,1,1,1
+

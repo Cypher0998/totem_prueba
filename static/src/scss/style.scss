@@ -1,52 +1,32 @@
-#contenedor{
-   background: url('/totem_prueba/static/src/img/fondo.jpg') no-repeat fixed center;
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   height: 100%;
-   width: 100% ;
-}
-
 .o_totem_prueba_totem_mode_text_header{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 #header{
-    background: url('/totem_prueba/static/src/img/header.jpg') no-repeat fixed center;
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   height: 100%;
-   width: 100% ;
+ /* background: url('/totem_prueba/static/src/img/header.jpg') no-repeat fixed center;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 #headerTotem{
-  width: 1080px;
-  height: 132px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 #leftArrow{
-  height:100px;
-  width:100px;
-
+  height:50px;
+  width:50px;
 }
+
 #rightArrow{
-  height:100px;
-  width:100px;
-}
-.myHeight {
-  height: 100px;
-}
-
-.myGeneralWidth {
-  width: 880px;
+  height:50px;
+  width:50px;
 }
 
 .buttons{
@@ -58,22 +38,18 @@
   text-align: center;
 }
 .o_totem_prueba_totem_mode_left_side{
- height:1656px;
    display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .o_totem_prueba_totem_mode_right_side{
- height:1656px;
  background-color: transparent;
     display: flex;
   align-items: center;
   justify-content: center;
 }
-#centerColumn{
-  height:1656px;
-}
+
 #title{
   color:white;
   font-size: 64px;
@@ -83,10 +59,9 @@
 #banner{
   position:absolute;
   padding-top:20px;
-  height:67.5%;
-  width:100%;
 }
-#QrBanner{
+
+.PosicionQR{
   position:absolute;
   right:0;
   bottom:0;
@@ -94,8 +69,6 @@
 
 #descriptionContent{
   padding-top: 50px;
-  height:15%;
-  width:100%;
 }
 #description{
   color : black;
@@ -111,32 +84,23 @@
 }
 #imagenSlider{
   background-color: transparent;
-  width:100%;
-  height:696px;
 }
 .BannerSection{
   position:relative;
-  height:688px;
 }
 
-#footer{
-    background: url('/totem_prueba/static/src/img/footer.jpg') no-repeat fixed center;
+/*#footer{
+   /* background: url('/totem_prueba/static/src/img/footer.jpg') no-repeat fixed center;*/
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
-   height: 100%;
-   width: 100% ;
-}
-.o_totem_prueba_totem_mode_footer{
-  width:1080px;
-  height:132px;
+}*/
+/*.o_totem_prueba_totem_mode_footer{
   display: flex;
   justify-content:space-between;
-}
+}*/
 #footerText{
-  height: 132px;
-  width: 948px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,24 +111,46 @@
   color : white;
   font-size: xx-large;
 }
-
-#QR{
-    padding-right: 12px;
-    float:right;
+#QRFooterContainer{
+    width: 132px;
+    height: 132px;
+    overflow: hidden;
+    margin:0px;
+    position: relative;
+}
+#QrPopUp{
+    width: 95px;
+    height: 90px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+#QRBannerContainer{
+      width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+.QR{
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 #videobanner{
   position:absolute;
   padding-top:20px;
-  height:67.5%;
-  width:100%;
 }
 
 #rss_video{
   position:absolute;
   padding-top:20px;
-  height:67.5%;
-  width:100%;
 }
 
 

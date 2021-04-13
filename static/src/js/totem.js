@@ -133,7 +133,10 @@ odoo.define('totem_prueba.totem', function(require) {
 			var def = await this._rpc({
 				model: 'res.company',
 				method: 'search_read',
-				args:[[], ['company_qr','company_description','event_duration','company_refresh_time','company_pop_up_time']],
+				args:[[], ['company_qr','company_description','event_duration',
+				'company_refresh_time','company_pop_up_time','company_header_background',
+				'company_general_background','company_footer_background',
+				'text_color_header','text_color_general','text_color_footer']],
 			})
 			.then(function(res) {
 				self.datos_company = res[0];

@@ -65,13 +65,15 @@
 
             <page string="Event's Date">
               <group rowspan="4">
-                <group rowspan="2" row="2">
+                <!-- <group rowspan="2" row="2">
                     <field name= "initial_event_datetime" widget = "datetime"/>
                 </group>
                 
                 <group rowspan="2" row="2">
                     <field name= "final_event_datetime"/>
-                </group>
+                </group> -->
+
+                <field name = "my_event_dates"/>
               </group> 
             </page>
 

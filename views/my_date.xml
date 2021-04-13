@@ -1,0 +1,41 @@
+<odoo>
+
+  <!-- treeview curso -->
+  <record model="ir.ui.view" id="view_my_date_id">
+    <field name="name">my_date.tree</field>
+    <field name="model">my_date.my_date</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <tree string="Conjunto de horas">
+        <field name="date"/>
+        <field name="hour_set"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- formulario para ls imágenes -->
+  <record model="ir.ui.view" id="view_id_my_date_form">
+    <field name="name">my_date.form</field>
+    <field name="model">my_date.my_date</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <form string="Formulario de horas">
+        <sheet>
+          <group>
+            <field name="date"/>
+            <field name="hour_set"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+<!-- vista de los cursos -->
+  <record model="ir.actions.act_window" id="my_date_list_action">
+    <field name="name">Vista de las Horas</field>
+    <field name="res_model">my_date.my_date</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <!-- <menuitem id="lista_imagenes" name="Lista de imágenes" parent="main_menu" action="image_list_action"/> -->
+</odoo>
