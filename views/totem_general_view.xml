@@ -12,8 +12,6 @@
         <field name="description"/>
         <field name="selector_banner"/>
         <field name="banner_url"/>
-        <field name="initial_event_datetime"/>
-        <field name="final_event_datetime"/>
       </tree>
     </field>
   </record>
@@ -30,20 +28,19 @@
             <group rowspan="2" row="2">
               <field name="name" required="1"/>
               <field name="description"/>
-              <!-- <field name="pop_up_qr_url" widget="url"/> -->
             </group>
             <group rowspan="2" row="2">
-              <field name="selector_banner" required="1"/>
+              <field name="selector_banner"/>
               <field name="banner" attrs="{'invisible':[('selector_banner','!=','pic')]}"/>
               <field name="banner_video" attrs="{'invisible':[('selector_banner','!=','video')]}" widget="url"/>
               <field name="banner_rss" attrs="{'invisible':[('selector_banner','!=','rss')]}" widget="url"/>
-              <field name="banner_url" widget="url" required="1"/>
+              <field name="banner_url" widget="url"/>
             </group>
           </group>
           <notebook>
             <page string="Image Slider">
               <label for = "image_ids"/> 
-              <field name = "image_ids" required="1"/>
+              <field name = "image_ids" />
             </page>
             
             <page string="Pop-up's Information">
@@ -65,14 +62,6 @@
 
             <page string="Event's Date">
               <group rowspan="4">
-                <!-- <group rowspan="2" row="2">
-                    <field name= "initial_event_datetime" widget = "datetime"/>
-                </group>
-                
-                <group rowspan="2" row="2">
-                    <field name= "final_event_datetime"/>
-                </group> -->
-
                 <field name = "my_event_dates"/>
               </group> 
             </page>

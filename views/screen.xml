@@ -43,7 +43,7 @@
     </field>
   </record>
   <!-- insercion de icono en la barra lateral -->
-  <menuitem id="main_menu" name="Totempplication" 
-    web_icon="totem_prueba,static/description/icon.png"
+  <menuitem id="main_menu" name="Definitive Totem" 
+    web_icon="totem_definitivo,static/description/icon.png"
     action="screen_list_action"/>
 </odoo>	

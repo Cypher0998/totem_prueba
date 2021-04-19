@@ -1,4 +1,4 @@
-odoo.define('totem_prueba.totem', function(require) {
+odoo.define('totem_definitivo.totem', function(require) {
 	// Sentencia para que si o si se ejecute 
 	"use strict";
 
@@ -113,15 +113,17 @@ odoo.define('totem_prueba.totem', function(require) {
 
 				console.log("self.slides", self.slides);
 				
-				for (let index = 0; index < aux.length; index++)
-					aux[index].style.display = "none";
-				
-				if (self.sliderIndex >= aux.length)
-					self.sliderIndex = 0;
-				aux[self.sliderIndex].style.display = "block";
-				self.sliderIndex++;
-				if (res[0].duration==0){
-					res[0].duration=4;
+				if (aux.length > 0) {
+					for (let index = 0; index < aux.length; index++)
+						aux[index].style.display = "none";
+								
+					if (self.sliderIndex >= aux.length)
+						self.sliderIndex = 0;
+					aux[self.sliderIndex].style.display = "block";
+					self.sliderIndex++;
+					// if (res[0].duration==0) {
+					// 	res[0].duration=4;
+					// }
 				}
 				self.myCarrousel = setTimeout(() => {self.config()},res[0].duration*1000); 
 			})
@@ -140,20 +142,20 @@ odoo.define('totem_prueba.totem', function(require) {
 			})
 			.then(function(res) {
 				self.datos_company = res[0];
-				if (self.datos_company.event_duration==0){
-					self.datos_company.event_duration=10;
-				}
+				// if (self.datos_company.event_duration==0){
+				// 	self.datos_company.event_duration=10;
+				// }
 
 				self.sacar_duration=(self.datos_company.event_duration * 1000);
 
-				if (self.datos_company.company_refresh_time == 0){
-					self.datos_company.company_refresh_time = 15;
-				}
+				// if (self.datos_company.company_refresh_time == 0){
+				// 	self.datos_company.company_refresh_time = 15;
+				// }
 				self.refreshTime=(self.datos_company.company_refresh_time * 1000);
 
-				if(self.datos_company.company_pop_up_time == 0){
-					self.datos_company.company_pop_up_time = 35;
-				}
+				// if(self.datos_company.company_pop_up_time == 0){
+				// 	self.datos_company.company_pop_up_time = 35;
+				// }
 				self.popUpTime = (self.datos_company.company_pop_up_time * 1000);
 			});
 		}, 
@@ -167,10 +169,32 @@ odoo.define('totem_prueba.totem', function(require) {
 			})
 			.then(function (res) {
 				clearTimeout(self.myCarrousel);
+				const HORAS = 86400000
+				let eventsInTime = []
+				for (let iterator = 0; iterator < res.length; iterator++){
+					let dentro=false;
+					console.log("Este es el objeto",res[iterator].my_event_dates);
+					res[iterator].my_event_dates.forEach(fechas =>{
+						let eventDate = Date.parse(fechas.date);
+						let endDate = eventDate;
+						if(fechas.final_date!=false)
+							endDate = Date.parse(fechas.final_date);
+						if(eventDate<=Date.now() && Date.now()<endDate+HORAS){
+							let todayTime = new Date(Date.now());
+							todayTime = (todayTime.getHours()*60*60*1000)+(todayTime.getMinutes()*60*1000);
+							for (let j=0; j<fechas.hour_set.length && dentro==false; j++){
+								if(fechas.hour_set[j].initial_hour<=todayTime && todayTime<fechas.hour_set[j].final_hour){
+									eventsInTime.push(res[iterator]);
+									dentro=true;
+								}
+							}
+						}
+					});
+				}
 				self.i = 0;
-				self.allMyEvents = res;
-	            self.event = res[self.i];
-	            console.log(self.event.banner_rss);
+				self.allMyEvents = eventsInTime;
+	            
+	            
 	            self.company_description = self.datos_company.company_description;
 				self.company_qr = self.datos_company.company_qr;
 				self.rebootTimeout();	
@@ -205,7 +229,7 @@ odoo.define('totem_prueba.totem', function(require) {
 			self.$el.html(QWeb.render("TotemModeMenu", {widget: self}));
 			// console.log($(".myImgSlider"))
 			 setTimeout(() =>{
-			 		$(".o_totem_prueba_totem_mode_footer").html(QWeb.render("ConfigsData", {widget: self.datos_company}));
+			 		$(".o_totem_definitivo_totem_mode_footer").html(QWeb.render("ConfigsData", {widget: self.datos_company}));
 			 },0);
 			self.backup(self.refreshTime*60);
 			setTimeout(() => {self.config();},0);
@@ -251,6 +275,6 @@ odoo.define('totem_prueba.totem', function(require) {
         self.resume();
     }
 
-	core.action_registry.add('totem_prueba_totem', TotemMode);
+	core.action_registry.add('totem_definitivo_totem', TotemMode);
 	return TotemMode;
 });

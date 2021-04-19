@@ -26,10 +26,5 @@ class Company(models.Model):
 		('white','Blanco'),
 		])
 
-	@api.model
-	def _get_default_company_description(self): 
-		return "Para más información consulte este qr"
-
 	company_description=fields.Text(help="Para más información consulte este qr")
-
 

@@ -7,8 +7,8 @@
     <field name="priority" eval="16"/>
     <field name="arch" type="xml">
       <tree string="Horas disponibles">
-        <field name="initial_hour" widget = "float_time"/>
-        <field name="final_hour" widget = "float_time"/>
+        <field name="initial_hour"/>
+        <field name="final_hour"/>
       </tree>
     </field>
   </record>
@@ -22,8 +22,8 @@
       <form string="Formulario de eventos">
         <sheet>
           <group>
-            <field name="initial_hour" widget = "float_time"/>
-            <field name="final_hour" widget = "float_time"/>
+            <field name="initial_hour"/>
+            <field name="final_hour"/>
           </group>
         </sheet>
       </form>
@@ -37,5 +37,6 @@
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
-  <!-- <menuitem id="lista_imagenes" name="Lista de imágenes" parent="main_menu" action="image_list_action"/> -->
+
+ <!--<menuitem id="time" name="Lista de imágenes" parent="main_menu" action="my_time_list_action"/> -->
 </odoo>

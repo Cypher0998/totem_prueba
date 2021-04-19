@@ -1,7 +1,7 @@
 <odoo>
-	<record model="ir.actions.client" id="totem_prueba_action_totem_mode">
+	<record model="ir.actions.client" id="totem_definitivo_action_totem_mode">
 		<field name="name">fullScreen</field>
-		<field name="tag">totem_prueba_totem</field>
+		<field name="tag">totem_definitivo_totem</field>
 		<field name="target">fullscreen</field>
 	</record>
 
@@ -9,6 +9,6 @@
 		id="modo_totem" 
 		name="Pantalla Completa" 
 		parent="main_menu"
-		action="totem_prueba_action_totem_mode"/>
+		action="totem_definitivo_action_totem_mode"/>
 
 </odoo>

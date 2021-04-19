@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "totem_prueba",
+    'name': "totem_definitivo",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as

@@ -1,12 +1,12 @@
 <odoo>
         <template id="assets_frotend" inherit_id="website.assets_backend" name="Totem">
             <xpath expr="." position="inside">
+                                
+                <link rel="stylesheet" type="text/css" href="/totem_definitivo/static/src/css/style.css"/>
                 <!-- Link para referenciar los css de bootstrap -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
-                
-                <link rel="stylesheet" type="text/scss" href="/totem_prueba/static/src/scss/style.scss"/>
 
-                <script type="text/javascript" src="/totem_prueba/static/src/js/totem.js"></script>	
+                <script type="text/javascript" src="/totem_definitivo/static/src/js/totem.js"></script>	
                 
                 <!-- Scripts con los que trabaja bootstrap -->
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
