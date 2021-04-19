@@ -19,7 +19,7 @@
 }
 
 
-.o_totem_prueba_totem_mode_text_header{
+.o_totem_definitivo_totem_mode_text_header{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,13 +52,13 @@
 .botonera{
   text-align: center;
 }
-.o_totem_prueba_totem_mode_left_side{
+.o_totem_definitivo_totem_mode_left_side{
    display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.o_totem_prueba_totem_mode_right_side{
+.o_totem_definitivo_totem_mode_right_side{
  background-color: transparent;
     display: flex;
   align-items: center;
@@ -107,13 +107,13 @@
 }
 
 #footer{
-    background: url('/totem_prueba/static/src/img/footer.jpg') no-repeat fixed center;*/
+    background: url('/totem_definitivo/static/src/img/footer.jpg') no-repeat fixed center;*/
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
 }
-.o_totem_prueba_totem_mode_footer{
+.o_totem_definitivo_totem_mode_footer{
   display: flex;
   justify-content:space-between;
   width:100%;
