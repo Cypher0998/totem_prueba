@@ -37,9 +37,6 @@ class totem_general(models.Model):
 
 
 	# Event's date Page fields
-	initial_event_datetime = fields.Datetime(string = _("Initial Date"))
-	final_event_datetime = fields.Datetime(string = _("Final Date"))
-
 	my_event_dates = fields.One2many('my_date.my_date', 'assigned_event',  string = _("Event Date Set"))
 
 	# Pop Up's Information fields
@@ -80,13 +77,15 @@ class totem_general(models.Model):
 		if len(events_id) > 0:
 			user_events= self.env['totem_general.totem_general'].search_read([('id','in',events_id[0]['event_ids'])],
 				['name','description','banner_url','banner_video','banner_rss','selector_banner',
-				'video_id','image_ids','initial_event_datetime','final_event_datetime','pop_up_product_name',
+				'video_id','image_ids','my_event_dates','pop_up_product_name',
 				'pop_up_description','pop_up_qr_url'])
 			
 			for i in user_events:
 				if i['selector_banner']=='rss':
 					banner_playlist = self.parse_rss_video_ids(self.get_RSS_data(i['banner_rss']))
-					i['banner_rss'] = banner_playlist		
+					i['banner_rss'] = banner_playlist
+				if i['my_event_dates']!='':
+					i['my_event_dates']=self.date_Time_Process(i['my_event_dates'])		
 
 		return user_events
 
@@ -110,7 +109,29 @@ class totem_general(models.Model):
 			iterador+=1
 
 		return media
+
+	def date_Time_Process(self,fecha):
+		FechasEmision = self.env['my_date.my_date'].search_read([('id','in',fecha)],['date','hour_set','final_date'])
+		for diaEmision in FechasEmision:
+			RangoHoras=self.env['my_time.my_time'].search_read([('id','in',diaEmision['hour_set'])],['initial_hour','final_hour'])
+			for hora in RangoHoras:
+				hora['initial_hour'] = self.convert_To_Seconds(hora['initial_hour'])
+				hora['final_hour'] = self.convert_To_Seconds(hora['final_hour'])
+				diaEmision['hour_set'][RangoHoras.index(hora)]=hora
+
+		return FechasEmision
+
+	def convert_To_Seconds(self,time):
+		Hour=str(time).rsplit('.',1)[0]
+		Min=str(time).rsplit('.',1)[1]
+		if len(Min)<=1:
+			Min=str(Min)+"0"
+		min_to_milsec=int(Min)*60*1000
+		hour_to_milsec=int(Hour)*60*60*1000
+
+		return hour_to_milsec + min_to_milsec
 		
+
 
 	def parse_rss_video_ids(self,ids_list):
 		final_string = "https://www.youtube.com/embed/"
@@ -123,13 +144,15 @@ class totem_general(models.Model):
 		final_string = final_string[:-1]
 		return final_string
 
-	
+	def is_filled(self, element):
+		return bool(element)
+
 
 	@api.constrains('description', 'CHARACTER_BOUNDARY', 'EXTENSE_LIMIT_CHARACTER')
 	def _constrains_description(self):
-		if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
-			raise exceptions.ValidationError(
-				_(self.CHARACTER_BOUNDARY + self.EXTENSE_LIMIT_CHARACTER)) 
+		if self.is_filled(self.description):
+			if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
+				raise exceptions.ValidationError(_(self.CHARACTER_BOUNDARY + self.EXTENSE_LIMIT_CHARACTER)) 
 		pass
 
 	@api.constrains('name', 'CHARACTER_BOUNDARY', 'NORMAL_LIMIT_CHARACTER')

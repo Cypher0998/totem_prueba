@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <template xml:space="preserve">
     <t t-name="TotemModeMenu">
-        <div id="contenedorBackGround">
-                <div class="row align-items-start">
+        <div class="container-fluid" id="contenedorBackGround">
+                <div class="row align-items-start" style="height:6.875vh;max-width: 1080px;">
                     <div class="col-lg-12 col-xl-12">
                         <div id="header">
                             <div class="o_totem_prueba_totem_mode_text_header">
@@ -17,9 +18,9 @@
                 </div>    
             
 
-            <div class="row justify-content-between align-items-center"> 
+            <div class="row justify-content-between align-items-center" style="max-width: 1080px;"> 
                 
-                <div class = "col-lg-1">
+                <div class = "col-lg-1 col-xl-1">
                     <div id="o_totem_prueba_totem_mode_left_side">
                         <div class="botonera">
                             <button class="buttons" id="leftArrowButton">
@@ -29,46 +30,48 @@
                     </div>
                 </div>
                
-                    <div class="col-lg-10 align-self-center">
-                        <div id="centerColumn">
-                           <div class="BannerSection">
-                                <div id="BotonBanner">
-                                    <t t-if="widget.event.selector_banner=='pic'">
-                                            <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
-                                                + (widget.event.id)
-                                                + '/banner/'}}"
-                                            />
-                                    </t>
-                                    <t t-elif="widget.event.selector_banner=='video'">
-                                        <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}"></iframe>
-                                    </t>
-                                    <t t-if="widget.event.selector_banner=='rss'">
-                                        <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}"></iframe>
-                                    </t>
+                    <div class="col-lg-10 col-xl-10 align-self-center" id="centerColumn">
+                            <div class="row justify-content-center" style="height:23vh;">
+                                        <t t-if="widget.event.selector_banner=='pic'">
+                                                <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
+                                                    + (widget.event.id)
+                                                    + '/banner/'}}"
+                                                />
+                                        </t>
+                                        <t t-elif="widget.event.selector_banner=='video'">
+                                            <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}"></iframe>
+                                        </t>
+                                        <t t-if="widget.event.selector_banner=='rss'">
+                                            <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}"></iframe>
+                                        </t>
+                            </div>
+                            <div class="row justify-content-end" style="height:10vh;padding-top:50px;">
+                                <div id="QRBannerContainer">
+                                    <img class="QR" id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=125&amp;height=125'}}"  
+                                    />
                                 </div>
-                                    <div class="PosicionQR">
-                                        <div id="QRBannerContainer">
-                                            <img class="QR" id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=125&amp;height=125'}}"  
-                                            />
-                                        </div>
+                            </div>
+                                
+                            <div class="row justify-content-center" style="height:11vh;">
+                                <div id="descriptionContent">
+                                    <div id="description"><t t-esc="widget.event.description"/></div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div id="slideshowContent">
+                                    <div id="slideshow">
+                                         <t t-foreach="widget.event.image_ids" t-as="i">
+                                            <div class="myImgSlider">
+                                                <img id="imagenSlider" t-attf-src="{{'/web/image/image.image/' 
+                                                + (i)
+                                                + '/my_image/'}}"
+                                                style="height:38vh;max-width:926.66px"
+                                                />
+                                            </div>
+                                        </t>   
                                     </div>
-                            </div>
-                            <div id="descriptionContent">
-                                <div id="description"><t t-esc="widget.event.description"/></div>
-                            </div>
-                            <div id="slideshowContent">
-                                <div id="slideshow">
-                                     <t t-foreach="widget.event.image_ids" t-as="i">
-                                        <div class="myImgSlider">
-                                            <img id="imagenSlider" t-attf-src="{{'/web/image/image.image/' 
-                                            + (i)
-                                            + '/my_image/'}}"
-                                        />
-                                        </div>
-                                    </t>   
                                 </div>
                             </div>
-                        </div>
                     </div>
                     
            
@@ -83,11 +86,8 @@
                 </div>                  
             </div>
             
-                <div class="row align-items-end">
-                    <div class="col-lg-12 col-xl-12">
-                        <div class="o_totem_prueba_totem_mode_footer" id="footer"/>
-                    </div>
-                </div> 
+            <div class="o_totem_prueba_totem_mode_footer"/>
+                 
 
             <div class="col-sm-8 col-lg-8 col-xl-8">
                 <!-- MODAL -->                
@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="row justify-content-end">
                                                     <div id="QrPopUp">
-                                                        <img class="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=115&amp;height=110'}}"/>
+                                                        <img class="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.pop_up_qr_url + '&amp;width=95&amp;height=90'}}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,20 +143,26 @@
     </t>
 
     <t t-name="ConfigsData">
-            <div id="footerText">
-                <div id="footerContent">
-                    <t t-if="widget.company_description==''">
-                        <p>Para más información, consulta este QR</p>
-                    </t>
-                    <t t-else="">
-                        <p><t t-esc="widget.company_description"/></p>
-                    </t>
+        <div class="row align-items-end" id="footer" style="height:6.875vh;max-width: 1080px;">
+            <div class="col-lg-10 col-xl-10 align-self-center">
+                <div id="footerText">
+                    <div id="footerContent">
+                        <t t-if="widget.company_description==''">
+                           <!-- <p>Para más información, consulta este QR</p>-->
+                        </t>
+                        <t t-else="">
+                            <p><t t-esc="widget.company_description"/></p>
+                        </t>
+                    </div>
                 </div>
             </div>
-            <div id="QRFooterContainer" style="margin:0;">
-                <img class="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.company_qr + '&amp;width=160&amp;height=160'}}" 
-                />
+            <div class="col-lg-2 col-xl-2">
+                <div id="QRFooterContainer" style="margin:0;float:left;width:180px;">
+                    <img class="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.company_qr + '&amp;width=132&amp;height=132'}}" style="padding-left:40px;padding-right:8px;" 
+                    />
+                </div>
             </div>
+        </div>
                     <style id="ModTemplates">
                         #contenedorBackGround {
                         <t t-if="widget.company_header_background=='' and widget.company_general_background=='' and widget.company_footer_background==''">
@@ -172,6 +178,8 @@
                            -moz-background-size: cover;
                            -o-background-size: cover;
                            background-size: cover;
+                            width: 100%;
+                            height: 100%;
                         }
 
                         #description{
@@ -192,8 +200,7 @@
                                -moz-background-size: cover;
                                -o-background-size: cover;
                                background-size: cover;
-                               height:100%;
-                               width:100%;
+                               width:1080px;
                         }
 
                         #title{
@@ -214,12 +221,14 @@
                            -moz-background-size: cover;
                            -o-background-size: cover;
                            background-size: cover;
-                           height:6.875%;
-                           width:100%;
+                           height:6.875vh;
+                           width:100vw;
                         }
 
                         #footerContent{
-                            color: <t t-esc="widget.text_color_footer"/>;                            
+                            color: <t t-esc="widget.text_color_footer"/>;
+                            text-align:center;
+                            padding-left:9.25%;                            
                         }
                     </style>
     </t>

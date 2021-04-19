@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
       <tree string="Conjunto de horas">
         <field name="date"/>
+        <field name="final_date"/>
         <field name="hour_set"/>
       </tree>
     </field>
@@ -23,6 +24,7 @@
         <sheet>
           <group>
             <field name="date"/>
+            <field name="final_date"/>
             <field name="hour_set"/>
           </group>
         </sheet>
