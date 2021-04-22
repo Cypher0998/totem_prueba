@@ -31,33 +31,60 @@
                 </div>
                
                     <div class="col-lg-10 col-xl-10 align-self-center" id="centerColumn">
-                            <div class="row justify-content-center" style="height:23vh;">
-                                        <t t-if="widget.event.selector_banner=='pic'">
-                                                <img id="banner" t-attf-src="{{'/web/image/totem_general.totem_general/' 
-                                                    + (widget.event.id)
-                                                    + '/banner/'}}"
-                                                />
-                                        </t>
-                                        <t t-elif="widget.event.selector_banner=='video'">
-                                            <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}"></iframe>
-                                        </t>
-                                        <t t-if="widget.event.selector_banner=='rss'">
-                                            <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}"></iframe>
-                                        </t>
-                            </div>
-                            <div class="row justify-content-end" style="height:10vh;padding-top:50px;">
-                                <div id="QRBannerContainer">
-                                    <img class="QR" id="QrBanner" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=125&amp;height=125'}}"  
+                            <t t-if="widget.event.selector_banner=='pic'">
+                                <div class="row justify-content-end" id="BannerContent" style="height:38vh;">
+                                    <img id="banner" t-attf-src="{{'/web/image/event.event/' 
+                                        + (widget.event.id)
+                                        + '/banner/'}}" style="height:38vh;width:926.66px"
                                     />
+
+                                    <div id="QRBannerContainer">
+                                        <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=125&amp;height=125'}}"  
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                                
-                            <div class="row justify-content-center" style="height:11vh;">
-                                <div id="descriptionContent">
-                                    <div id="description"><t t-esc="widget.event.description"/></div>
+
+                                <div class="row justify-content-center" style="height:25.25vh;">
+                                    <div class="descriptionContent">
+                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row justify-content-center">
+                            </t>
+
+                            <t t-elif="widget.event.selector_banner=='video'">
+                                <div class="row justify-content-end" id="VideoContent" style="height:23vh;">
+                                    <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}" style="height:23vh;max-width:926.66px"></iframe>
+
+                                    <div class="QRVideoContainer">
+                                        <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=95&amp;height=95'}}"  
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center" style="height:40.25vh;">
+                                    <div class="descriptionContent">
+                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <t t-if="widget.event.selector_banner=='rss'">
+                                <div class="row justify-content-end" id="RssContent" style="height:23vh;">
+                                    <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}" style="height:23vh;max-width:926.66px"></iframe>
+
+                                    <div class="QRVideoContainer">
+                                        <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=95&amp;height=95'}}"  
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center" style="height:40.25vh;">
+                                    <div class="descriptionContent">
+                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <div class="row justify-content-center" style="height:21vh;margin-bottom:2vh;">
                                 <div id="slideshowContent">
                                     <div id="slideshow">
                                          <t t-foreach="widget.event.image_ids" t-as="i">
@@ -65,7 +92,7 @@
                                                 <img id="imagenSlider" t-attf-src="{{'/web/image/image.image/' 
                                                 + (i)
                                                 + '/my_image/'}}"
-                                                style="height:38vh;max-width:926.66px"
+                                                style="height:21vh;max-width:926.66px"
                                                 />
                                             </div>
                                         </t>   
@@ -75,7 +102,7 @@
                     </div>
                     
            
-                <div class="col-lg-1">
+                <div class="col-lg-1 col-xl-1">
                     <div id="o_totem_definitivo_totem_mode_right_side">
                         <div class="botonera">
                             <button class="buttons" id="rightArrowButton">
@@ -105,17 +132,18 @@
                                     <div class = "container-fluid">
                                         <div class = "row">
                                             <div class="col-md-4 col-sm-4" >
-                                                <img t-attf-src="{{'/web/image/totem_general.totem_general/' + widget.event.id + '/pop_up_image/'}}" style="width:200px;height:270px;margin-left: -9%;"/>
+                                                <img t-attf-src="{{'/web/image/event.event/' + widget.event.id + '/pop_up_image/'}}" style="height:5vh;max-width:200px;margin-left: -9%;"/>
                                             </div>
 
                                         <!-- <div class="column" style="position:relative;width:400px"> -->
                                             <div class="col-md-8 col-sm-8" >
                                                 <div class="row">
-                                                    <p>
+                                                    
                                                         <h3 class="modal-title" id="exampleModalLongTitle">
                                                                  <t t-esc="widget.event.pop_up_product_name"/>
                                                          </h3>
-                                                    </p>
+                                                </div>
+                                                <div class="row">    
                                                     <t t-esc="widget.event.pop_up_description"/> 
                                                 </div>
                                                 <div class="row justify-content-end">
@@ -182,7 +210,7 @@
                             height: 100%;
                         }
 
-                        #description{
+                        .description{
                             color: <t t-esc="widget.text_color_general"/>;
                         }
 
@@ -190,7 +218,7 @@
                             <t t-if="widget.company_header_background=='' and widget.company_general_background=='' and widget.company_footer_background==''">
                                 background: url('/totem_definitivo/static/src/img/header.jpg') no-repeat fixed center;
                             </t>
-                            <t t-if="widget.company_header_background=='' and widget.company_general_background!=''">
+                            <t t-elif="widget.company_header_background=='' and widget.company_general_background!=''">
                                 background-color: transparent;
                             </t>
                             <t t-else="">
@@ -223,6 +251,7 @@
                            background-size: cover;
                            height:6.875vh;
                            width:100vw;
+                           padding-left:70px;
                         }
 
                         #footerContent{

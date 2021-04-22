@@ -9,15 +9,21 @@ import logging, re
 _logger=logging.getLogger(__name__)
 
 class totem_general(models.Model):
-	_name = 'totem_general.totem_general'
+	_inherit = 'event.event'
 
 	# CONSTANT VARS
 	CHARACTER_BOUNDARY_MESSAGE = 'Límite de caracteres '
 	NORMAL_LIMIT_CHARACTER = 80
 	EXTENSE_LIMIT_CHARACTER = 250
+	DESCRIPTION_LIMIT_CHARACTER = 800
 
+	# Display selector
+	selector_display = fields.Selection([
+		('web','Solo Web'),
+		('totem','Solo Totem'),
+		('web_totem',"Web y Totem")],
+		string = _('Display Type'), default = 'web_totem')
 	# General fields
-	name = fields.Char(string = _('Name'))
 	banner = fields.Binary(string = _('Banner'))
 	description = fields.Text(string = _('Description'))
 	
@@ -75,7 +81,7 @@ class totem_general(models.Model):
 		user_events = []
 
 		if len(events_id) > 0:
-			user_events= self.env['totem_general.totem_general'].search_read([('id','in',events_id[0]['event_ids'])],
+			user_events= self.env['event.event'].search_read([('id','in',events_id[0]['event_ids'])],
 				['name','description','banner_url','banner_video','banner_rss','selector_banner',
 				'video_id','image_ids','my_event_dates','pop_up_product_name',
 				'pop_up_description','pop_up_qr_url'])
@@ -147,33 +153,35 @@ class totem_general(models.Model):
 	def is_filled(self, element):
 		return bool(element)
 
-
-	@api.constrains('description', 'CHARACTER_BOUNDARY', 'EXTENSE_LIMIT_CHARACTER')
-	def _constrains_description(self):
-		if self.is_filled(self.description):
-			if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
-				raise exceptions.ValidationError(_(self.CHARACTER_BOUNDARY + self.EXTENSE_LIMIT_CHARACTER)) 
-		pass
-
 	@api.constrains('name', 'CHARACTER_BOUNDARY', 'NORMAL_LIMIT_CHARACTER')
 	def _constrains_name(self):
 		if len(self.name) > self.NORMAL_LIMIT_CHARACTER:
 			raise exceptions.ValidationError(
 				_(self.CHARACTER_BOUNDARY + self.NORMAL_LIMIT_CHARACTER))
 		pass
+	@api.constrains('description','selector_banner','CHARACTER_BOUNDARY','DESCRIPTION_LIMIT_CHARACTER')
+	def _constrains_description_event(self):
+		if self.selector_banner == 'pic':
+			if len(self.description) > self.DESCRIPTION_LIMIT_CHARACTER:
+				raise exceptions.ValidationError(self.CHARACTER_BOUNDARY + self.DESCRIPTION_LIMIT_CHARACTER)
+		else:
+			if len(self.description) > 1400:
+				raise exceptions.ValidationError(self.CHARACTER_BOUNDARY + "900")
+		pass
+
 
 
 	@api.constrains('pop_up_qr_url', 'CHARACTER_BOUNDARY','EXTENSE_LIMIT_CHARACTER')
-	def _constrains_description(self): 
-		if len(self.description) > self.EXTENSE_LIMIT_CHARACTER:
+	def _constrains_pop_up_url(self): 
+		if len(self.pop_up_qr_url) > self.EXTENSE_LIMIT_CHARACTER:
 			raise exceptions.ValidationError(
 				_(self.CHARACTER_BOUNDARY + 
 					self.EXTENSE_LIMIT_CHARACTER)) 
 		pass
 
 	@api.constrains('pop_up_product_name', 'CHARACTER_BOUNDARY', 'NORMAL_LIMIT_CHARACTER')
-	def _constrains_description(self):  
-		if len(self.description) > self.NORMAL_LIMIT_CHARACTER:
+	def _constrains_pop_up_name(self):  
+		if len(self.pop_up_product_name) > self.NORMAL_LIMIT_CHARACTER:
 			raise exceptions.ValidationError(
 				_(self.CHARACTER_BOUNDARY_MESSAGE + 
 					self.NORMAL_LIMIT_CHARACTER)) 

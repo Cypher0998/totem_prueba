@@ -9,10 +9,12 @@ from . import utilities
 class ResConfigSettings(models.TransientModel):
 	_inherit = 'res.config.settings'
 
+	DEFAULT_COMPANY_QR = 'https://bakata.es/'
+	DEFAULT_DESCRIPTION_MESSAGE = 'Si desea reservar su propio espacio publicitario, contacte con Bakata Solutions, S.L'
+
 	OVERFLOW_TIME_MESSAGE = "El valor debe ser al menos 0 o superior"
 	CHARACTER_BOUNDARY_MESSAGE = 'Límite de caracteres '
 	NORMAL_LIMIT_CHARACTER = 100
-	DEFAULT_DESCRIPTION_MESSAGE = 'Si desea reservar su propio espacio publicitario, contacte con Bakata Solutions, S.L'
 
 	duration = fields.Float(
 		string= _("Duration's slider"), 
@@ -63,6 +65,11 @@ class ResConfigSettings(models.TransientModel):
 	def is_filled(self, element):
 		return bool(element)
 
+	@api.onchange('company_qr', 'DEFAULT_COMPANY_QR')
+	def on_change_default_company_qr(self): 
+		if not self.is_filled(self.company_qr):
+			self.company_qr = self.DEFAULT_COMPANY_QR
+
 	@api.onchange('company_description', 'DEFAULT_DESCRIPTION_MESSAGE')
 	def on_change_default_company_description(self): 
 		if not self.is_filled(self.company_description):
@@ -86,7 +93,7 @@ class ResConfigSettings(models.TransientModel):
 	@api.onchange('pop_up_time')
 	def on_change_default_pop_up_time(self): 
 		if not self.is_filled(self.pop_up_time):
-			self.pop_up_time = 10
+			self.pop_up_time = 20
 
 
 	@api.constrains('company_description', 'NORMAL_LIMIT_CHARACTER', 'CHARACTER_BOUNDARY_MESSAGE')

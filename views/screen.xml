@@ -39,11 +39,13 @@
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
     <field name="help" type="html">
-      <p class="o_view_nocontent_smiling-face">No hay títulos</p>
+      <p class="o_view_nocontent_smiling-face">No hay pantallas creadas</p>
     </field>
   </record>
   <!-- insercion de icono en la barra lateral -->
-  <menuitem id="main_menu" name="Definitive Totem" 
+  <menuitem id="main_menu" name="Totem" 
     web_icon="totem_definitivo,static/description/icon.png"
-    action="screen_list_action"/>
+    parent="event.event_main_menu"/>
+  <menuitem id="crear_pantalla" name="Pantallas/Usuarios"
+    action="screen_list_action" parent="main_menu"/>
 </odoo>	

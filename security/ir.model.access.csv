@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_totem_general_totem_general,totem_general.totem_general,model_totem_general_totem_general,,1,1,1,1
+access_event_event,event.event,model_event_event,,1,1,1,1
 
 access_image_image,image.image,model_image_image,,1,1,1,1
 

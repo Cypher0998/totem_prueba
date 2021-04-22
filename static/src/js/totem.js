@@ -163,7 +163,7 @@ odoo.define('totem_definitivo.totem', function(require) {
 		descargarDatos: async function() {
 			let self = this;		
 			var def =  await this._rpc({
-				model: 'totem_general.totem_general',
+				model: 'event.event',
 				method: 'get_events_by_screen',
 				args: [this.getSession().uid, ],
 			})

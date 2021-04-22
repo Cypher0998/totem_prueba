@@ -47,7 +47,7 @@
 
                                     <label for="pop_up_time"/>
                                     <div class="text-muted">
-                                        Por defecto => 35 segundos.
+                                        Por defecto => 20 segundos.
                                     </div>
                                     <field name="pop_up_time"/>
                                 </div>
@@ -101,8 +101,8 @@
     </record> 
 
     <menuitem id="menu_sale_general_settings"
-        name="Configuración"
-        parent="main_menu"
+        name="Configuraciones del Totem"
+        parent="event.menu_event_configuration"
         action="action_events_config_settings"/>
 
 </odoo>

@@ -1,78 +1,118 @@
 <odoo>
 
   <!-- treeview totem -->
+  <!--
   <record model="ir.ui.view" id="view_totem_id">
     <field name="name">totem.tree</field>
     <field name="model">totem_general.totem_general</field>
     <field name="priority" eval="16"/>
     <field name="arch" type="xml">
       <tree string="Event's List">
-        <field name="name"/>
+        <field name="name"/> -->
         <!-- <field name="banner"/> -->
-        <field name="description"/>
+       <!-- <field name="description"/>
         <field name="selector_banner"/>
         <field name="banner_url"/>
       </tree>
     </field>
-  </record>
+  </record>-->
 
   <!-- formulario totem -->
   <record model="ir.ui.view" id="view_id_form">
     <field name="name">totem_general.form</field>
-    <field name="model">totem_general.totem_general</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_form"/>
     <field name="priority" eval="16"/>
     <field name="arch" type="xml">
-      <form string="Formulario de eventos">
-        <sheet>
+      <xpath expr="//group/group" position="before">
+        <field name="selector_display" required="1"/>
+      </xpath>
+      <xpath expr="//field[@name='date_begin']" position="attributes">
+        <attribute name="required">False</attribute>
+      </xpath>
+      <xpath expr="//field[@name='date_end']" position="attributes">
+        <attribute name="required">False</attribute>
+      </xpath>
+      <xpath expr="//field[@name='date_tz']" position="attributes">
+        <attribute name="required">False</attribute>
+      </xpath>
+      <xpath expr="//div[@class='oe_button_box']" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//group/group" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='is_online']" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//label[@for='is_online']" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//group[2]" position="attributes">
+       <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//group[4]" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//page[1]" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//page[@name='event_mail_schedule']" position="attributes">
+        <attribute name="attrs">{'invisible':[('selector_display','=','totem')]}</attribute>
+      </xpath>
+      <xpath expr="//notebook" position="inside">
+        <page name="totem" string="Información del totem" attrs="{'invisible':[('selector_display','=','web')]}">
           <group rowspan="4">
             <group rowspan="2" row="2">
-              <field name="name" required="1"/>
-              <field name="description"/>
+              <field name="description" attrs="{'invisible':[('selector_display','=','web')]}"/>
             </group>
             <group rowspan="2" row="2">
-              <field name="selector_banner"/>
+              <field name="selector_banner" attrs="{'invisible':[('selector_display','=','web')]}"/>
               <field name="banner" attrs="{'invisible':[('selector_banner','!=','pic')]}"/>
               <field name="banner_video" attrs="{'invisible':[('selector_banner','!=','video')]}" widget="url"/>
               <field name="banner_rss" attrs="{'invisible':[('selector_banner','!=','rss')]}" widget="url"/>
-              <field name="banner_url" widget="url"/>
+              <field name="banner_url" attrs="{'invisible':[('selector_display','=','web')]}" widget="url"/>
             </group>
-          </group>
-          <notebook>
-            <page string="Image Slider">
-              <label for = "image_ids"/> 
-              <field name = "image_ids" />
-            </page>
-            
-            <page string="Pop-up's Information">
-              <group rowspan="4">
-                <group rowspan="2" row="2">
-                    <field name= "pop_up_image" widget = "image" width = "150px" />
-                </group>
+           </group>
+         </page>
+        </xpath>
+        <xpath expr="//page[@name='totem']" position="inside">
+          <notebook attrs="{'invisible':[('selector_display','=','web')]}">
+                  <page string="Image Slider">
+                    <label for = "image_ids"/> 
+                    <field name = "image_ids" />
+                  </page>
+                  
+                  <page string="Pop-up's Information">
+                    <group rowspan="4">
+                      <group rowspan="2" row="2">
+                          <field name= "pop_up_image" widget = "image" width = "150px" />
+                      </group>
 
-                <group rowspan="2" row="2">
-                    <field name="pop_up_product_name"/>
-                    <field name="pop_up_description"/> 
-                </group>
-              </group>
+                      <group rowspan="2" row="2">
+                          <field name="pop_up_product_name"/>
+                          <field name="pop_up_description"/> 
+                      </group>
+                    </group>
 
-              <group rowspan="2">
-                <field name="pop_up_qr_url" widget="url"/> 
-              </group>
-            </page>
+                    <group rowspan="2">
+                      <field name="pop_up_qr_url" widget="url"/> 
+                    </group>
+                  </page>
 
-            <page string="Event's Date">
-              <group rowspan="4">
-                <field name = "my_event_dates"/>
-              </group> 
-            </page>
+                  <page string="Event's Date">
+                    <group rowspan="4">
+                      <field name = "my_event_dates"/>
+                    </group> 
+                  </page>
 
-          </notebook>
-        </sheet>
-      </form>
+               </notebook>
+        </xpath>
     </field>
   </record>
 
 <!-- vista del totem -->
+<!--
   <record model="ir.actions.act_window" id="totem_list_action">
     <field name="name">Vista de los Eventos</field>
     <field name="res_model">totem_general.totem_general</field>
@@ -82,6 +122,6 @@
       <p class="o_view_nocontent_smiling-face">No hay títulos</p>
     </field>
   </record>
-
-  <menuitem id="prueba_menu" name="Eventos" parent="main_menu" action="totem_list_action"/>  
+-->
+  <!--<menuitem id="prueba_menu" name="Eventos" parent="main_menu" action="totem_list_action"/> --> 
 </odoo>

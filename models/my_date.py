@@ -10,7 +10,7 @@ class My_Date(models.Model):
 	date = fields.Date(string = _('Initial Date'))
 	final_date=fields.Date(string=_('Final Date'))
 	hour_set = fields.Many2many('my_time.my_time', string = _("Available Hour Set"))
-	assigned_event = fields.Many2one('totem_general.totem_general', string = _("My Assigned Event"))
+	assigned_event = fields.Many2one('event.event', string = _("My Assigned Event"))
 
 	@api.model
 	def is_filled(self, element):
