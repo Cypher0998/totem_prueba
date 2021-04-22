@@ -11,11 +11,10 @@
 }
 
 #contenedorBackGround{
-  max-height: 1920px;
-  max-width: 1080px;
   overflow: hidden;
-  
+  margin:0;
   padding: 0;
+  max-height: 1920px;
 }
 
 
@@ -71,28 +70,15 @@
   color:white;
 }
 
-#banner{
-  width: 100vw;
-  height:463px;
-}
-
-#videobanner{
-  width: 100vw;
-  height:463px;
-
-}
-
-#rss_video{
-  width: 100vw;
-  height:463px;
-}
-
 .descriptionContent{
   padding-top: 50px;
 }
 .description{
   color : black;
   font-size: x-large;
+  padding: 15px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 #slideshowContent{
   display: flex;
@@ -202,6 +188,13 @@
 #BannerContent{
   position:relative;
 }
+.BannerPush{
+  position: absolute;
+  background: transparent;
+  top:0;
+  z-index: 1;
+}
+
 #VideoContent{
   position: relative;
 }

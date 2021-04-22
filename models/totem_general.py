@@ -159,16 +159,6 @@ class totem_general(models.Model):
 			raise exceptions.ValidationError(
 				_(self.CHARACTER_BOUNDARY + self.NORMAL_LIMIT_CHARACTER))
 		pass
-	@api.constrains('description','selector_banner','CHARACTER_BOUNDARY','DESCRIPTION_LIMIT_CHARACTER')
-	def _constrains_description_event(self):
-		if self.selector_banner == 'pic':
-			if len(self.description) > self.DESCRIPTION_LIMIT_CHARACTER:
-				raise exceptions.ValidationError(self.CHARACTER_BOUNDARY + self.DESCRIPTION_LIMIT_CHARACTER)
-		else:
-			if len(self.description) > 1400:
-				raise exceptions.ValidationError(self.CHARACTER_BOUNDARY + "900")
-		pass
-
 
 
 	@api.constrains('pop_up_qr_url', 'CHARACTER_BOUNDARY','EXTENSE_LIMIT_CHARACTER')

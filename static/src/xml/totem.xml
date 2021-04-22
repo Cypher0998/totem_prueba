@@ -4,7 +4,7 @@
     <t t-name="TotemModeMenu">
         <div class="container-fluid" id="contenedorBackGround">
                 <div class="row align-items-start" style="height:6.875vh;max-width: 1080px;">
-                    <div class="col-lg-12 col-xl-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div id="header">
                             <div class="o_totem_definitivo_totem_mode_text_header">
                                 <div id="headerTotem">
@@ -20,7 +20,7 @@
 
             <div class="row justify-content-between align-items-center" style="max-width: 1080px;"> 
                 
-                <div class = "col-lg-1 col-xl-1">
+                <div class = "col-sm-1 col-md-1 col-lg-1 col-xl-1">
                     <div id="o_totem_definitivo_totem_mode_left_side">
                         <div class="botonera">
                             <button class="buttons" id="leftArrowButton">
@@ -30,56 +30,61 @@
                     </div>
                 </div>
                
-                    <div class="col-lg-10 col-xl-10 align-self-center" id="centerColumn">
+                    <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 align-self-center" id="centerColumn">
                             <t t-if="widget.event.selector_banner=='pic'">
                                 <div class="row justify-content-end" id="BannerContent" style="height:38vh;">
                                     <img id="banner" t-attf-src="{{'/web/image/event.event/' 
                                         + (widget.event.id)
-                                        + '/banner/'}}" style="height:38vh;width:926.66px"
+                                        + '/banner/'}}" style="height:38vh;max-width:926.66px;width:100%;"
                                     />
 
                                     <div id="QRBannerContainer">
                                         <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=125&amp;height=125'}}"  
                                         />
                                     </div>
+
+                                    <div class="BannerPush" style="height:38vh;width:926.66px"></div>
                                 </div>
 
                                 <div class="row justify-content-center" style="height:25.25vh;">
                                     <div class="descriptionContent">
-                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                        <div class="description" style="height:20.25vh;"><t t-esc="widget.event.description"/></div>
                                     </div>
                                 </div>
                             </t>
 
                             <t t-elif="widget.event.selector_banner=='video'">
                                 <div class="row justify-content-end" id="VideoContent" style="height:23vh;">
-                                    <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}" style="height:23vh;max-width:926.66px"></iframe>
+                                    <iframe id="videobanner" t-attf-src="{{widget.event.banner_video + '?autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=' + widget.event.video_id}}" style="height:23vh;max-width:926.66px;width:100%;"></iframe>
 
                                     <div class="QRVideoContainer">
                                         <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=95&amp;height=95'}}"  
                                         />
                                     </div>
+                                    <div class="BannerPush" style="height:23vh;width:926.66px;"></div>
                                 </div>
 
                                 <div class="row justify-content-center" style="height:40.25vh;">
                                     <div class="descriptionContent">
-                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                        <div class="description" style="height:35.25vh;"><t t-esc="widget.event.description"/></div>
                                     </div>
                                 </div>
                             </t>
 
                             <t t-if="widget.event.selector_banner=='rss'">
                                 <div class="row justify-content-end" id="RssContent" style="height:23vh;">
-                                    <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}" style="height:23vh;max-width:926.66px"></iframe>
+                                    <iframe id="rss_video" t-attf-src="{{widget.event.banner_rss}}" style="height:23vh;max-width:926.66px;width:100%;"></iframe>
 
                                     <div class="QRVideoContainer">
                                         <img t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.event.banner_url + '&amp;width=95&amp;height=95'}}"  
                                         />
                                     </div>
+
+                                    <div class="BannerPush" style="height:23vh;width:926.66px;"></div>
                                 </div>
                                 <div class="row justify-content-center" style="height:40.25vh;">
                                     <div class="descriptionContent">
-                                        <div class="description"><t t-esc="widget.event.description"/></div>
+                                        <div class="description" style="height:35.25vh;"><t t-esc="widget.event.description"/></div>
                                     </div>
                                 </div>
                             </t>
@@ -102,7 +107,7 @@
                     </div>
                     
            
-                <div class="col-lg-1 col-xl-1">
+                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
                     <div id="o_totem_definitivo_totem_mode_right_side">
                         <div class="botonera">
                             <button class="buttons" id="rightArrowButton">
@@ -116,7 +121,7 @@
             <div class="o_totem_definitivo_totem_mode_footer"/>
                  
 
-            <div class="col-sm-8 col-lg-8 col-xl-8">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <!-- MODAL -->                
                 <div class="modal fade modal-perl" id="myPopUp" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -132,7 +137,7 @@
                                     <div class = "container-fluid">
                                         <div class = "row">
                                             <div class="col-md-4 col-sm-4" >
-                                                <img t-attf-src="{{'/web/image/event.event/' + widget.event.id + '/pop_up_image/'}}" style="height:5vh;max-width:200px;margin-left: -9%;"/>
+                                                <img t-attf-src="{{'/web/image/event.event/' + widget.event.id + '/pop_up_image/'}}" style="height:10vh;max-width:200px;margin-left: -9%;"/>
                                             </div>
 
                                         <!-- <div class="column" style="position:relative;width:400px"> -->
@@ -172,7 +177,7 @@
 
     <t t-name="ConfigsData">
         <div class="row align-items-end" id="footer" style="height:6.875vh;max-width: 1080px;">
-            <div class="col-lg-10 col-xl-10 align-self-center">
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 align-self-center">
                 <div id="footerText">
                     <div id="footerContent">
                         <t t-if="widget.company_description==''">
@@ -184,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-xl-2">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
                 <div id="QRFooterContainer" style="margin:0;float:left;width:180px;">
                     <img class="QR" t-attf-src="{{'/report/barcode/?type=QR&amp;value=' + widget.company_qr + '&amp;width=132&amp;height=132'}}" style="padding-left:40px;padding-right:8px;" 
                     />

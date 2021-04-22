@@ -34,7 +34,7 @@ odoo.define('totem_definitivo.totem', function(require) {
 				this.clear();
 				this.backSlide();
 			}, 200, true),
-			"click #centerColumn": _.debounce(function(){
+			"click .BannerPush": _.debounce(function(){
 				var self = this;
                 setTimeout(function(){self.modalBool = true;},0);
                 console.log("1");
